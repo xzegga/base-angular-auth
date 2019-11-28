@@ -1,0 +1,707 @@
+/* Property: display
+  Description: This defines a flex container; inline or block depending on the given value.
+  It enables a flex context for all its direct children..
+  Apply to: Container */
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+
+/* Property: flex-direction
+  Description: This establishes the main-axis, thus defining the direction flex items are placed in the flex container.
+  Apply to: Container */
+
+.flex-row {
+    -moz-box-direction: normal;
+    -webkit-box-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flexbox-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.flex-rowreverse {
+    -moz-box-direction: normal;
+    -webkit-box-direction: row-reverse;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row-reverse;
+    -ms-flexbox-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+.flex-col {
+    -moz-box-direction: column;
+    -webkit-box-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flexbox-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+
+/* Property: flex-wrap
+  Description: By default, flex items will all try to fit onto one line.
+  You can change that and allow the items to wrap as needed with this property.
+  Apply to: Container */
+
+.flex-wrap {
+    -moz-box-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flexbox-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.flex-nowrap {
+    -moz-box-wrap: nowrap;
+    -webkit-box-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    -ms-flexbox-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+
+/* Property: align-items
+  Description: This defines the default behaviour for how flex items are laid out along the cross axis on the current line.
+  Apply to: Container */
+
+.vCenter {
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+}
+
+.vStart {
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.vEnd {
+    -webkit-align-items: flex-end;
+    -moz-align-items: flex-end;
+    -ms-align-items: flex-end;
+    align-items: flex-end;
+}
+
+.vcEnd {
+    -webkit-align-content: flex-end;
+    -moz-align-content: flex-end;
+    -ms-align-content: flex-end;
+    align-content: flex-end;
+}
+
+.vStretch {
+    -webkit-align-items: stretch;
+    -moz-align-items: stretch;
+    -ms-align-items: stretch;
+    align-items: stretch;
+}
+
+.vbaseline {
+    -webkit-align-items: baseline;
+    -moz-align-items: baseline;
+    -ms-align-items: baseline;
+    align-items: baseline;
+}
+
+
+/* Property: justify-content
+  Description: This defines the alignment along the main axis.
+  It helps distribute extra free space left over when either all the flex items on a line are inflexible,
+  or are flexible but have reached their maximum size
+  Apply to: Container */
+
+.hCenter {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: center;
+    -ms-flex-pack: justify;
+    -moz-box-pack: justify;
+    justify-content: center;
+}
+
+.hAround {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: justify;
+    -moz-box-pack: justify;
+    justify-content: space-around;
+}
+
+.hBetween {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    -moz-box-pack: justify;
+    justify-content: space-between;
+}
+
+.hStart {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: justify;
+    -moz-box-pack: justify;
+    justify-content: flex-start;
+}
+
+.hEnd {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: justify;
+    -moz-box-pack: justify;
+    justify-content: flex-end;
+}
+
+
+/*
+  mobile flex
+  Property: display (media queries)
+  Description: This defines a flex container; inline or block depending on the screen resolution.
+  Apply to: Container
+*/
+
+.fGrow1 {
+    flex-grow: 1;
+}
+
+.fGrow2 {
+    flex-grow: 2;
+}
+
+
+/*min-width*/
+
+@media screen and (min-width: 980px) {
+    .flex980 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .flex960 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .flex800 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .flex768 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .flex640 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .flex600 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 568px) {
+    .flex568 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .flex480 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 425px) {
+    .flex425 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 320px) {
+    .flex320 {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+
+/*max-width*/
+
+@media screen and (max-width: 800px) {
+    .flex800max {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hAround768 {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: justify;
+        -moz-box-pack: justify;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .hAround640 {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: justify;
+        -moz-box-pack: justify;
+        justify-content: space-around;
+    }
+    .hCenter640 {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: center;
+        -ms-flex-pack: justify;
+        -moz-box-pack: justify;
+        justify-content: center;
+    }
+    .vCenter640 {
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+    }
+    .flex-col {
+        -moz-box-direction: column;
+        -webkit-box-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-flex-direction: column;
+        -ms-flexbox-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hAround480 {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: justify;
+        -moz-box-pack: justify;
+        justify-content: space-around;
+    }
+    .hCenter480 {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: center;
+        -ms-flex-pack: justify;
+        -moz-box-pack: justify;
+        justify-content: center;
+    }
+    .vCenter480 {
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+    }
+    .flex-col {
+        -moz-box-direction: column;
+        -webkit-box-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-flex-direction: column;
+        -ms-flexbox-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+/* reset font-size to 10px  */
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+*:focus {
+    outline: 0;
+}
+
+img {
+    border: 0;
+    vertical-align: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.trans {
+    -webkit-transition: all ease 0.2s;
+    -o-transition: all ease 0.2s;
+    transition: all ease 0.2s;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* end reset */
+
+body {
+    font: 1.6rem/1.3 'Roboto', sans-serif;
+    background: #353132;
+    /*border-bottom: 5px solid red;*/
+}
+
+
+/* -------------- */
+
+.header {
+    width: 100%;
+    height: 30px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#3b3e99+33,ffffff+33,ffffff+33,ffffff+66,00b0f2+66 */
+    background: #3b3e99;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #3b3e99 33.33%, #ffffff 33.33%, #ffffff 33.33%, #ffffff 66.66%, #00b0f2 66.66%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #3b3e99 33.33%, #ffffff 33.33%, #ffffff 33.33%, #ffffff 66.66%, #00b0f2 66.66%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #3b3e99 33.33%, #ffffff 33.33%, #ffffff 33.33%, #ffffff 66.66%, #00b0f2 66.66%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3b3e99', endColorstr='#00b0f2', GradientType=1);
+    /* IE6-9 */
+    border-bottom: 5px solid #ff2e34;
+}
+
+.trigt {
+    text-align: right;
+}
+
+.maxw {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+}
+
+.logo {
+    text-align: center;
+    padding: 35px;
+}
+
+.avatarheader {
+    padding: 15px 20px;
+}
+
+.avatar {
+    width: 120px;
+    overflow: hidden;
+    height: 120px;
+    margin: auto;
+    border-radius: 50%;
+    position: relative;
+    text-align: center;
+}
+
+.avatar img {
+    width: 100%;
+}
+
+.avatar:after {
+    position: absolute;
+    content: "\f055";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #fff;
+    font-size: 3.4rem;
+    opacity: 0.6;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+}
+
+.formContent {
+    padding: 0 20px 30px;
+    color: #fff;
+}
+
+.login a {
+    color: #fff;
+    text-align: right;
+}
+
+label {
+    font-weight: 300;
+    font: 1.6rem/1.3 'Roboto', sans-serif;
+}
+
+input,
+select {
+    width: 100%;
+    height: 35px;
+    border: 0;
+    margin: 3px 0 10px;
+    padding: 0 10px;
+    color: #353132;
+    background: #e6e6e6;
+}
+
+.formContent button {
+    width: 100%;
+    height: 35px;
+    background: #df3439;
+    cursor: pointer;
+    color: #fff;
+    border: 0;
+    margin: 20px 0 0;
+    font-weight: 700;
+    border-radius: 17px;
+}
+
+input:focus {
+    background: #fff;
+    border: 1px solid #00afff;
+}
+
+.contacts input:last-child {
+    margin: 0 0 15px 0;
+}
+
+.line {
+    border-top: 1px solid rgba(255, 255, 255, .4);
+    margin: 10px 0;
+}
+
+input[type=search],
+.search button {
+    height: 50px;
+    background: #cccccc;
+    border-style: solid;
+    border-color: #fff;
+}
+
+input[type=search] {
+    border-radius: 25px 0 0 25px;
+    margin: 0;
+    padding: 0 20px;
+    border-width: 2px 0 2px 2px;
+}
+
+.search button {
+    width: 60px;
+    border-radius: 0 25px 25px 0;
+    font-size: 2.2rem;
+    border-width: 2px 2px 2px 0;
+    cursor: pointer;
+}
+
+.editcontent {
+    background: #fff;
+    margin-top: -50px;
+}
+
+.bordertop {
+    width: 100%;
+    height: 8px;
+    margin-bottom: 50px;
+    background: -webkit-linear-gradient(left, #3b3e99 0%, #3b3e99 50%, #00b0f2 50%, #00b0f2 100%);
+    background: -o-linear-gradient(left, #3b3e99 0%, #3b3e99 50%, #00b0f2 50%, #00b0f2 100%);
+    background: linear-gradient(to right, #3b3e99 0%, #3b3e99 50%, #00b0f2 50%, #00b0f2 100%);
+}
+
+.edit label {
+    color: #515151;
+}
+
+.edit .line {
+    border-top: 1px solid #e6e6e6;
+}
+
+.goback a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    border: 2px solid #fff;
+    font-size: 18px;
+}
+
+
+/* profile */
+
+.profileContent {
+    padding: 0 10px;
+}
+
+.profileContent h1 {
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.editbuton {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.editbuton a {
+    color: inherit;
+}
+
+.profileContent table {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+}
+
+.profileContent td {
+    padding: 10px 5px;
+    border-top: 1px solid rgba(0, 0, 0, .3);
+}
+
+
+/* userlist */
+
+.userlist,
+.userlist table {
+    width: 100%;
+}
+
+.userlist tr:nth-child(even) {
+    background: #e8e8e8;
+}
+
+.userlist tr {
+    display: block;
+    padding: 3px 20px;
+}
+
+.userlist tr:nth-child(3n + 1) td:first-child {
+    border-left: 4px solid #00b0f2;
+}
+
+.userlist tr:nth-child(3n + 3) td:first-child {
+    border-left: 4px solid #df3439;
+}
+
+.userlist tr:nth-child(3n + 2) td:first-child {
+    border-left: 4px solid #3b3e99;
+}
+
+.userlist td:nth-child(2n) {
+    width: 100%;
+}
+
+.userlist td {
+    padding: 8px 5px;
+}
+
+.userlist a {
+    display: block;
+}
+
+.thumbAvatar {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.thumbAvatar img {
+    width: 100%;
+}
+
+.searchico {
+    text-align: center;
+}
+
+.invite {
+    padding: 20px;
+}
+
+.logout {
+    position: relative;
+}
+
+.logout fa-icon {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    font-size: 2rem;
+    color: white;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid white;
+    padding: 5px 10px;
+}

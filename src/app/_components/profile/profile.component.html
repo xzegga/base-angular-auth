@@ -1,0 +1,70 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="maxw avatarheader">
+    <div class="goback flex hBetween">
+        <a class="flex hCenter vCenter" href="javascript:history.go(-1)">
+            <!-- <ion-icon name="arrow-round-back"></ion-icon> -->
+        </a>
+    </div>
+    <div class="avatar"><img src="assets/avatar.png" alt=""></div>
+</div>
+
+<div class="editcontent">
+    <div class="bordertop"></div>
+
+    <div class="maxw profileContent">
+        <h1>Arturo Cornejo</h1>
+        <div class="editbuton">
+            <a class="iconEdit" ion-button (click)="navEdit()">
+                <!-- <ion-icon name="create"></ion-icon> Editar perfil -->
+            </a>
+        </div>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Correo electrónico:</td>
+                    <td>{{profile?.email}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de nacimiento:</td>
+                    <td>{{profile?.date}}</td>
+                </tr>
+                <tr>
+                    <td>Tipo sanguíneo:</td>
+                    <td>{{profile?.bloodtype}}</td>
+                </tr>
+                <tr>
+                    <td>DUI:</td>
+                    <td>{{profile?.dui}}</td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td>{{profile?.phone}}</td>
+                </tr>
+                <tr>
+                    <td>Tipo de Seguro:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Aseguradora:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>No. póliza:</td>
+                    <td>{{profile?.poliza}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Contactos de emergencia:</td>
+                </tr>
+                <tr *ngFor="let contact of profile?.contacts">
+                    <td>{{contact?.name}}</td>
+                    <td>{{contact?.phone}}</td>
+                </tr>
+            </table>
+
+
+        </div>
+
+        <div class="formContent edit"></div>
+    </div>
+</div>
