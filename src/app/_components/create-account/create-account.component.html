@@ -1,1 +1,68 @@
 <ngx-loading [show]="loading"></ngx-loading>
+<div class="logo">
+    <img src="assets/logo.png" alt="">
+</div>
+<div class="maxw formContent register">
+    <form action="">
+        <label for="">Nombres:</label>
+        <input type="text" name="email" placeholder="Nombres" [(ngModel)]="profile.first_name" required>
+
+        <label for="">Apellidos:</label>
+        <input type="text" name="email" placeholder="Apellidos" [(ngModel)]="profile.last_name" required>
+
+        <label for="">Correo electrónico:</label>
+        <input type="email" name="email" placeholder="E-mail" [(ngModel)]="profile.email" required>
+
+        <label for="">Contraseña:</label>
+        <input type="password" name="password" required>
+
+        <label for="">Repetir contraseña:</label>
+        <input type="password" name="confirmPassword" required>
+
+        <div class="line"></div>
+
+        <label for="">Fecha de nacimiento:</label>
+        <input type="text" name="email" placeholder="Fecha de nacimiento" [(ngModel)]="profile.birthdate" required>
+
+        <label for="">Tipo de sangre:</label>
+        <input type="text" name="email" placeholder="Tipo de sangre [(ngModel)]=" profile.bloodtype " required>
+
+      <label for=" ">DUI:</label>
+      <input type="text " name="email " placeholder="DUI " [(ngModel)]="profile.dui " required>
+
+      <label for=" ">Teléfono:</label>
+      <input type="tel " name="email " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
+
+      <label for=" ">Tipo de seguro:</label>
+      <select name=" " id="tseguro ">
+        <option value=" ">Seleccione</option>
+        <option value="ISSS ">ISSS</option>
+        <option value="poliza ">Póliza</option>
+      </select>
+       <div id="sPoliza ">
+         <label for=" ">Aseguradora:</label>
+         <input type="text " id="seguro " disabled="true ">
+         <label for=" ">Póliza:</label>
+         <input type="text " id="poliza " disabled="true ">
+       </div>
+
+      <div class="line "></div>
+      <div class="contacts ">
+        <p>Contactos en caso de emergencia</p>
+        <div class=" ">
+          <input type="text " placeholder="Nombre ">
+          <input type="text " placeholder="Teléfono ">
+        </div>
+        <div class=" ">
+          <input type="text " placeholder="Nombre ">
+          <input type="text " placeholder="Teléfono ">
+        </div>
+        <div class=" ">
+          <input type="text " placeholder="Nombre ">
+          <input type="text " placeholder="Teléfono ">
+        </div>
+      </div>
+
+      <button type="submit ">REGISTRARSE</button>
+    </form>
+  </div>

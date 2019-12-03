@@ -1,3 +1,4 @@
+import { Invite } from './../_models/user';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
@@ -38,8 +39,12 @@ export class TierritasService {
     );
   }
 
-  sendInvite(){
-
+  sendInvite(invite: Invite){
+    return this.http
+    .post<Invite>(this.basePath + 'invite/', invite, this.httpOptions)
+    .pipe(
+        catchError(this.handleError)
+    );
   }
 
   createAccount(){

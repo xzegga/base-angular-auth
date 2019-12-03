@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.loginForm(this.model).subscribe(response => {
       if (response.status === 'success') {
-        this.authService.setUser(response);
         this.loading = false;
+        this.authService.setUser(response);
       }
     }, error => {
       console.error(error);

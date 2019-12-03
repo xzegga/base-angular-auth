@@ -12,7 +12,7 @@
     <div class="bordertop"></div>
 
     <div class="maxw profileContent">
-        <h1>Arturo Cornejo</h1>
+        <h1>{{profile?.first_name}} {{profile?.last_name}}</h1>
         <div class="editbuton">
             <a class="iconEdit" ion-button (click)="navEdit()">
                 <!-- <ion-icon name="create"></ion-icon> Editar perfil -->
@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <td>Fecha de nacimiento:</td>
-                    <td>{{profile?.date}}</td>
+                    <td>{{profile?.birthdate | date : 'dd-MMM-yyyy'}}</td>
                 </tr>
                 <tr>
                     <td>Tipo sanguíneo:</td>
@@ -43,18 +43,18 @@
                 </tr>
                 <tr>
                     <td>Tipo de Seguro:</td>
-                    <td></td>
+                    <td>{{profile?.health_insurance_type}}</td>
                 </tr>
                 <tr>
                     <td>Aseguradora:</td>
-                    <td></td>
+                    <td>{{profile?.insurance_company}}</td>
                 </tr>
                 <tr>
                     <td>No. póliza:</td>
-                    <td>{{profile?.poliza}}</td>
+                    <td>{{profile?.insurance_policy}}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">Contactos de emergencia:</td>
+                    <td colspan="2" class="contacts-title">Contactos de emergencia:</td>
                 </tr>
                 <tr *ngFor="let contact of profile?.contacts">
                     <td>{{contact?.name}}</td>

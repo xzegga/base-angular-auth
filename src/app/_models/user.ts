@@ -1,12 +1,12 @@
 // user.ts
 export interface LoginResponse {
-    status: string,
-    message: string,
-    Authorization: string
+    status: string;
+    message: string;
+    Authorization: string;
 }
 
-export interface Profile{
-    id: number;
+export class Profile {
+    id: string;
     email: string;
     first_name: string;
     last_name: string;
@@ -14,23 +14,13 @@ export interface Profile{
     dui?: string;
     bloodtype?: string;
     contacts?: Array<Contact>;
-    poliza?: string;
-    date?: string;
-}
-
-export interface Register{
-    id: number;
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone?: string;
-    dui?: string;
-    bloodtype?: string;
     health_insurance_type?: string;
     insurance_company?: string;
     insurance_policy?: string;
-    contacts?: Array<Contact>
+    birthdate?: string;
+    password?: string;
 }
+
 
 export interface Contact {
     id: number;

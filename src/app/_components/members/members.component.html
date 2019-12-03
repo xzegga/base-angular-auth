@@ -1,8 +1,7 @@
 <div class="maxw avatarheader">
     <div class="searchico"><img src="assets/search.png" alt=""></div>
     <div class="search flex">
-        <input type="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
+        <input type="search" [(ngModel)]="filterString">
     </div>
 </div>
 <ngx-loading [show]="loading"></ngx-loading>
@@ -11,21 +10,17 @@
 
     <div class="maxw userlist">
 
-        <div>
-            <table>
-                <tr *ngFor="let member of members" (click)="showProfile(member.id)">
-                    <td>
-                        <div class="thumbAvatar"><img src="assets/avatar.png" alt=""></div>
-                    </td>
-                    <td><span>{{member.first_name}} {{member.last_name}}</span></td>
-                </tr>
-            </table>
+        <table>
+            <tr *ngFor="let member of (members | filterList: filterString)" (click)="showProfile(member.id)">
+                <td>
+                    <div class="thumbAvatar"><img src="assets/avatar.png" alt=""></div>
+                </td>
+                <td><span>{{member.first_name}} {{member.last_name}}</span></td>
+            </tr>
+        </table>
 
-            <div class="formContent">
-                <button (click)="invite()" class="btn btn-primary">INVITAR USUARIOS</button>
-            </div>
+        <div class="formContent">
+            <button (click)="invite()" class="btn btn-primary" *ngIf="isProfileAdmin">INVITAR USUARIOS</button>
         </div>
-
     </div>
-
 </div>

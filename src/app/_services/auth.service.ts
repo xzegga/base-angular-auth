@@ -5,12 +5,13 @@ import { retry, catchError } from 'rxjs/operators';
 import { LoginResponse } from '../_models/user';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
- 
+import * as jwt_decode from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
- 
+
   // API path
   basePath = environment.api_url;
 
@@ -18,16 +19,17 @@ export class AuthService {
     private router: Router,
     private http: HttpClient
   ) { }
- 
+
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
- 
+
   // Handle API errors
   handleError(error: HttpErrorResponse) {
+    console.log(error);
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -42,8 +44,8 @@ export class AuthService {
     return throwError(
       'Something bad happened; please try again later.');
   }
- 
- 
+
+
   // Verify user credentials on server to get token
   loginForm(data): Observable<LoginResponse> {
     return this.http
@@ -52,13 +54,13 @@ export class AuthService {
           catchError(this.handleError)
       );
   }
- 
+
   // After login save token and other values(if any) in localStorage
   setUser(resp: LoginResponse) {
     localStorage.setItem('access_token', resp.Authorization);
     this.router.navigate(['/members']);
   }
- 
+
   // Checking if token is set
   isLoggedIn() {
     return localStorage.getItem('access_token') != null;
@@ -68,17 +70,25 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
+  getDecodedAccessToken(token: string): any {
+    try{
+        return  jwt_decode(token);
+    } catch (Error) {
+        return null;
+    }
+  }
+
   refreshToken() {
     return of({});
   }
-  
+
   // After clearing localStorage redirect to login screen
   logout() {
     localStorage.clear();
     this.router.navigate(['/auth/login']);
   }
- 
- 
+
+
   // Get data from server for Dashboard
   getData(data): Observable<LoginResponse> {
     return this.http

@@ -1,1 +1,36 @@
 <ngx-loading [show]="loading"></ngx-loading>
+<div class="logo">
+    <img src="assets/logo.png" alt="">
+</div>
+<div class="maxw formContent login">
+    <div class="form-login">
+        <table>
+            <tr>
+                <td>Correo electrónico:</td>
+            </tr>
+            <tr *ngFor='let invite of invites; let i = index'>
+                <td class="iconEdit">
+                    <input [(ngModel)]="invite.email" type="email" />
+                    <div class="checkboxT">
+                        <label class="check-lbl"><input type="checkbox" name="checkbox" [(ngModel)]="invite.isAdmin" />&nbsp;Admin</label>
+                    </div>
+                    <div class="boxMin">
+                        <div class="plus-icon" *ngIf="i === invites.length -1">
+                            <fa-icon [icon]="faPlus" (click)="addNewInvite()"></fa-icon>
+                        </div>
+                        <div class="plus-icon" *ngIf="i != invites.length -1">
+                            <fa-icon [icon]="faMinus" (click)="removeInvite(i)"></fa-icon>
+                        </div>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+        <div class="editButton">
+            <button (click)="sendInvites()">ENVIAR INVITACIÓN</button>
+        </div>
+    </div>
+</div>

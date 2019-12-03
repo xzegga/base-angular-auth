@@ -18,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TokenInterceptor } from './_services/token-interceptor';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { FilterListPipe } from './_utils/filter-list.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
     ProfileComponent,
     InviteComponent,
     ResetPasswordComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    FilterListPipe
   ],
   imports: [
     BrowserModule,

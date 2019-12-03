@@ -1,5 +1,5 @@
 import { TierritasService } from './../../_services/tierritas.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Profile } from 'src/app/_models/user';
@@ -9,7 +9,7 @@ import { Profile } from 'src/app/_models/user';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription> = [];
   profile: Profile;
   public loading = false;
@@ -33,5 +33,13 @@ export class ProfileComponent implements OnInit {
       this.profile = profile;
       this.loading = false;
     });
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subscriptions) {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    }
   }
 }

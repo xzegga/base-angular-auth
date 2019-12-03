@@ -31,6 +31,10 @@ const routes: Routes = [
   },
   {
     path: 'create-account',
+    component: LoginComponent
+  },
+  {
+    path: 'create-account/:token',
     component: CreateAccountComponent
   },
   {
