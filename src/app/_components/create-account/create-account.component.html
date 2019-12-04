@@ -3,18 +3,19 @@
     <img src="assets/logo.png" alt="">
 </div>
 <div class="maxw formContent register">
-    <form action="">
+    <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
+    <form autocomplete="off" action="">
+        <label for="">Correo electrónico:</label>
+        <div class="fakeFormField">{{profile.email}}</div>        
+
         <label for="">Nombres:</label>
         <input type="text" name="email" placeholder="Nombres" [(ngModel)]="profile.first_name" required>
 
         <label for="">Apellidos:</label>
         <input type="text" name="email" placeholder="Apellidos" [(ngModel)]="profile.last_name" required>
-
-        <label for="">Correo electrónico:</label>
-        <input type="email" name="email" placeholder="E-mail" [(ngModel)]="profile.email" required>
-
+       
         <label for="">Contraseña:</label>
-        <input type="password" name="password" required>
+        <input type="password" autocomplete="new-password" name="password" required>
 
         <label for="">Repetir contraseña:</label>
         <input type="password" name="confirmPassword" required>
@@ -25,7 +26,7 @@
         <input type="text" name="email" placeholder="Fecha de nacimiento" [(ngModel)]="profile.birthdate" required>
 
         <label for="">Tipo de sangre:</label>
-        <input type="text" name="email" placeholder="Tipo de sangre [(ngModel)]=" profile.bloodtype " required>
+        <input type="text" name="email" placeholder="Tipo de sangre" [(ngModel)]=" profile.bloodtype" required>
 
       <label for=" ">DUI:</label>
       <input type="text " name="email " placeholder="DUI " [(ngModel)]="profile.dui " required>

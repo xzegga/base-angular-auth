@@ -30,7 +30,8 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   onRouteChanged(map: ParamMap) {
     const token = map.get('token');
     const decodedToken = this.authService.getDecodedAccessToken(token);
-    this.profile.email = decodedToken.email;
+    this.profile.email = decodedToken['email'];
+    //console.log(this.profile.email);
   }
 
   ngOnDestroy() {
