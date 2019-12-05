@@ -2,7 +2,7 @@ import { AuthService } from './../../_services/auth.service';
 import { TierritasService } from './../../_services/tierritas.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Profile, Contact, newUser} from 'src/app/_models/user';
 
 @Component({
@@ -15,7 +15,10 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription> = [];
   profile: Profile = new Profile();
 
-  constructor(public activatedRoute: ActivatedRoute, private authService: AuthService, private tierritasService: TierritasService) { }
+  constructor(public activatedRoute: ActivatedRoute, 
+    private authService: AuthService, 
+    private tierritasService: TierritasService,
+    private route: Router) { }
 
 
   ngOnInit() {
@@ -27,19 +30,25 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       routeSubscription
     ];
 
-    /*this.profile.contacts = [
+    this.profile.contacts = [
       new Contact(),
       new Contact(),
       new Contact()
-    ]*/
+    ]
   }
 
   onRouteChanged(map: ParamMap) {
     this.profile.token = map.get('token');
-    const decodedToken = this.authService.getDecodedAccessToken(this.profile.token );
-    this.profile.email = decodedToken['email'];
-    this.profile = newUser(this.profile.token, this.profile.email);
-    console.log(this.profile);
+    this.tierritasService.validateInviteToken(this.profile.token).subscribe(response => {
+        if(response === 'valid'){
+          const decodedToken = this.authService.getDecodedAccessToken(this.profile.token );
+          this.profile.email = decodedToken['email'];
+          //this.profile = newUser(this.profile.token, this.profile.email);
+        }else {
+          this.route.navigateByUrl('login')
+        }
+      } 
+    )    
   }
 
   ngOnDestroy() {

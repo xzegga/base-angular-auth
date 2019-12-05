@@ -15,7 +15,7 @@
         <input type="text" name="last_name" placeholder="Apellidos" [(ngModel)]="profile.last_name" required>
        
         <label for="">Contraseña:</label>
-        <input type="password" autocomplete="new-password" name="password" required>
+        <input type="password" autocomplete="new-password" name="password" [(ngModel)]="profile.password" required>
 
         <label for="">Repetir contraseña:</label>
         <input type="password" name="confirmPassword" required>
@@ -35,10 +35,10 @@
       <input type="tel " name="phone " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
 
       <label for=" ">Tipo de seguro:</label>
-      <select name=" " id="tseguro ">
+      <select  id="tseguro">
         <option value=" ">Seleccione</option>
-        <option value="ISSS ">ISSS</option>
-        <option value="poliza ">Póliza</option>
+        <option value="ISSS">ISSS</option>
+        <option value="poliza">Póliza</option>
       </select>
        <div id="sPoliza ">
          <label for=" ">Aseguradora:</label>
@@ -64,6 +64,6 @@
         </div>
       </div>
 
-      <button type="submit" [disabled]="submitted || !form.valid">REGISTRARSE</button>
+      <button type="submit" [disabled]="submitted || !form.valid" [ngClass]="{'invalid': !form.valid}">REGISTRARSE</button>
     </form>
   </div>

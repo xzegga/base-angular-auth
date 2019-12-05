@@ -30,6 +30,7 @@ export class MembersComponent implements OnInit {
     this.loading = true;
     this.tierritasService.getMembers()
     .subscribe((members: Profile[]) => {
+      console.log(members)
       this.members = members;
       this.getCurrentProfileId(members);
       this.loading = false;
@@ -41,7 +42,7 @@ export class MembersComponent implements OnInit {
     const currentProf = this.auth.getDecodedAccessToken(token);
     this.currentProfileId = currentProf.user_id;
     this.isProfileAdmin = currentProf.isAdmin;
-    this.currentProfile = members.filter((profile: Profile) => profile.id = this.currentProfileId)[0];
+    this.currentProfile = members.filter((profile: Profile) => profile.id == this.currentProfileId)[0];
   }
 
   showProfile(profileId: string){

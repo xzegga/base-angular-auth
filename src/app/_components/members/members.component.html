@@ -11,12 +11,14 @@
     <div class="maxw userlist">
 
         <table>
-            <tr *ngFor="let member of (members | filterList: filterString)" (click)="showProfile(member.id)">
-                <td>
-                    <div class="thumbAvatar"><img src="assets/avatar.png" alt=""></div>
-                </td>
-                <td><span>{{member.first_name}} {{member.last_name}}</span></td>
-            </tr>
+            <ng-template ngFor let-member [ngForOf]="members | filterList: filterString">
+                <tr (click)="showProfile(member.id)">
+                    <td>
+                        <div class="thumbAvatar"><img src="assets/avatar.png" alt=""></div>
+                    </td>
+                    <td><span>{{member.first_name}} {{member.last_name}}</span></td>
+                </tr>
+            </ng-template>
         </table>
 
         <div class="formContent">
