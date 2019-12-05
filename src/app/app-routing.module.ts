@@ -1,3 +1,4 @@
+import { ForgotPasswordComponent } from './_components/forgot-password/forgot-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './_guards/auth.guard';
@@ -26,15 +27,15 @@ const routes: Routes = [
     component: InviteComponent
   },
   {
-    path: 'reset-password',
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset-password/:token',
     component: ResetPasswordComponent
   },
   {
-    path: 'create-account',
-    component: LoginComponent
-  },
-  {
-    path: 'create-account/:token',
+    path: 'sign-up/:token',
     component: CreateAccountComponent
   },
   {

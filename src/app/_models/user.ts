@@ -71,3 +71,10 @@ export function newUser(token: string, email: string): Profile {
         token: token
     }
 }
+
+
+export class ResetPassword {
+    new_password: string;
+    password_confirm: string;
+    token: string;
+  }

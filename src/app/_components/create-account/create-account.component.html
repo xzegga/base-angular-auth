@@ -6,14 +6,14 @@
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
     <form (ngSubmit)="signUp()" #form="ngForm" autocomplete="off" action="">
         <label for="">Correo electrónico:</label>
-        <div class="fakeFormField">{{profile.email}}</div>        
+        <div class="fakeFormField">{{profile.email}}</div>
 
         <label for="">Nombres:</label>
         <input type="text" name="first_name" placeholder="Nombres" [(ngModel)]="profile.first_name" required>
 
         <label for="">Apellidos:</label>
         <input type="text" name="last_name" placeholder="Apellidos" [(ngModel)]="profile.last_name" required>
-       
+
         <label for="">Contraseña:</label>
         <input type="password" autocomplete="new-password" name="password" [(ngModel)]="profile.password" required>
 
@@ -28,42 +28,42 @@
         <label for="">Tipo de sangre:</label>
         <input type="text" name="bloodtype" placeholder="Tipo de sangre" [(ngModel)]="profile.bloodtype" required>
 
-      <label for=" ">DUI:</label>
-      <input type="text " name="dui " placeholder="DUI " [(ngModel)]="profile.dui " required>
+        <label for=" ">DUI:</label>
+        <input type="text " name="dui " placeholder="DUI " [(ngModel)]="profile.dui " required>
 
-      <label for=" ">Teléfono:</label>
-      <input type="tel " name="phone " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
+        <label for=" ">Teléfono:</label>
+        <input type="tel " name="phone " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
 
-      <label for=" ">Tipo de seguro:</label>
-      <select  id="tseguro">
+        <label for=" ">Tipo de seguro:</label>
+        <select id="tseguro">
         <option value=" ">Seleccione</option>
         <option value="ISSS">ISSS</option>
         <option value="poliza">Póliza</option>
       </select>
-       <div id="sPoliza ">
-         <label for=" ">Aseguradora:</label>
-         <input type="text " id="seguro " disabled="true ">
-         <label for=" ">Póliza:</label>
-         <input type="text " id="poliza " disabled="true ">
-       </div>
+        <div id="sPoliza ">
+            <label for=" ">Aseguradora:</label>
+            <input type="text " id="seguro " disabled="true ">
+            <label for=" ">Póliza:</label>
+            <input type="text " id="poliza " disabled="true ">
+        </div>
 
-      <div class="line "></div>
-      <div class="contacts ">
-        <p>Contactos en caso de emergencia</p>
-        <div class=" ">
-          <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[0].name">
-          <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[0].phone">
+        <div class="line "></div>
+        <div class="contacts ">
+            <p>Contactos en caso de emergencia</p>
+            <div class=" ">
+                <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[0].name">
+                <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[0].phone">
+            </div>
+            <div class=" ">
+                <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[1].name">
+                <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[1].phone">
+            </div>
+            <div class=" ">
+                <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[2].name">
+                <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[2].phone">
+            </div>
         </div>
-        <div class=" ">
-          <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[1].name">
-          <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[1].phone">
-        </div>
-        <div class=" ">
-          <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[2].name">
-          <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[2].phone">
-        </div>
-      </div>
 
-      <button type="submit" [disabled]="submitted || !form.valid" [ngClass]="{'invalid': !form.valid}">REGISTRARSE</button>
+        <button type="submit" [disabled]="submitted || !form.valid" [ngClass]="{'invalid': !form.valid}">REGISTRARSE</button>
     </form>
-  </div>
+</div>

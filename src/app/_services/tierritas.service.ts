@@ -63,10 +63,22 @@ export class TierritasService {
     );
   }
 
-  resetPassword(){
-
+  forgotPassword(email: string){
+    const payload = {email};
+    return this.http
+    .post<any>(this.basePath + `forgot-password/`, payload, this.httpOptions)
+    .pipe(
+        catchError(this.handleError)
+    );
   }
 
+  resetPassword(payload: any){
+    return this.http
+    .post<any>(this.basePath + `reset-password/`, payload, this.httpOptions)
+    .pipe(
+        catchError(this.handleError)
+    );
+  }
     // Handle API errors
     handleError(error: HttpErrorResponse) {
       if (error.error instanceof ErrorEvent) {
