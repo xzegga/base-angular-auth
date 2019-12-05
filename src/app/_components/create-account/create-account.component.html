@@ -4,15 +4,15 @@
 </div>
 <div class="maxw formContent register">
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
-    <form autocomplete="off" action="">
+    <form (ngSubmit)="signUp()" #form="ngForm" autocomplete="off" action="">
         <label for="">Correo electrónico:</label>
         <div class="fakeFormField">{{profile.email}}</div>        
 
         <label for="">Nombres:</label>
-        <input type="text" name="email" placeholder="Nombres" [(ngModel)]="profile.first_name" required>
+        <input type="text" name="first_name" placeholder="Nombres" [(ngModel)]="profile.first_name" required>
 
         <label for="">Apellidos:</label>
-        <input type="text" name="email" placeholder="Apellidos" [(ngModel)]="profile.last_name" required>
+        <input type="text" name="last_name" placeholder="Apellidos" [(ngModel)]="profile.last_name" required>
        
         <label for="">Contraseña:</label>
         <input type="password" autocomplete="new-password" name="password" required>
@@ -23,16 +23,16 @@
         <div class="line"></div>
 
         <label for="">Fecha de nacimiento:</label>
-        <input type="text" name="email" placeholder="Fecha de nacimiento" [(ngModel)]="profile.birthdate" required>
+        <input type="text" name="birthdate" placeholder="Fecha de nacimiento" [(ngModel)]="profile.birthdate" required>
 
         <label for="">Tipo de sangre:</label>
-        <input type="text" name="email" placeholder="Tipo de sangre" [(ngModel)]=" profile.bloodtype" required>
+        <input type="text" name="bloodtype" placeholder="Tipo de sangre" [(ngModel)]="profile.bloodtype" required>
 
       <label for=" ">DUI:</label>
-      <input type="text " name="email " placeholder="DUI " [(ngModel)]="profile.dui " required>
+      <input type="text " name="dui " placeholder="DUI " [(ngModel)]="profile.dui " required>
 
       <label for=" ">Teléfono:</label>
-      <input type="tel " name="email " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
+      <input type="tel " name="phone " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
 
       <label for=" ">Tipo de seguro:</label>
       <select name=" " id="tseguro ">
@@ -51,19 +51,19 @@
       <div class="contacts ">
         <p>Contactos en caso de emergencia</p>
         <div class=" ">
-          <input type="text " placeholder="Nombre ">
-          <input type="text " placeholder="Teléfono ">
+          <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[0].name">
+          <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[0].phone">
         </div>
         <div class=" ">
-          <input type="text " placeholder="Nombre ">
-          <input type="text " placeholder="Teléfono ">
+          <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[1].name">
+          <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[1].phone">
         </div>
         <div class=" ">
-          <input type="text " placeholder="Nombre ">
-          <input type="text " placeholder="Teléfono ">
+          <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[2].name">
+          <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[2].phone">
         </div>
       </div>
 
-      <button type="submit ">REGISTRARSE</button>
+      <button type="submit" [disabled]="submitted || !form.valid">REGISTRARSE</button>
     </form>
   </div>

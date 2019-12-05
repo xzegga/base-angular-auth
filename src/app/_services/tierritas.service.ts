@@ -47,8 +47,12 @@ export class TierritasService {
     );
   }
 
-  createAccount(){
-
+  signUpMember(profile: Profile){
+    return this.http
+    .post<any>(this.basePath + 'signup/', profile, this.httpOptions)
+    .pipe(
+        catchError(this.handleError)
+    );
   }
 
   resetPassword(){

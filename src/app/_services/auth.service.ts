@@ -88,6 +88,10 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
+  redirect() {
+    this.router.navigate(['/auth/login']);
+  }
+
 
   // Get data from server for Dashboard
   getData(data): Observable<LoginResponse> {

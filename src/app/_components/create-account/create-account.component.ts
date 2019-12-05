@@ -1,8 +1,9 @@
 import { AuthService } from './../../_services/auth.service';
+import { TierritasService } from './../../_services/tierritas.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Profile } from 'src/app/_models/user';
+import { Profile, Contact, newUser} from 'src/app/_models/user';
 
 @Component({
   selector: 'app-create-account',
@@ -14,7 +15,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription> = [];
   profile: Profile = new Profile();
 
-  constructor(public activatedRoute: ActivatedRoute, private authService: AuthService) { }
+  constructor(public activatedRoute: ActivatedRoute, private authService: AuthService, private tierritasService: TierritasService) { }
 
 
   ngOnInit() {
@@ -25,13 +26,20 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     this.subscriptions = [
       routeSubscription
     ];
+
+    /*this.profile.contacts = [
+      new Contact(),
+      new Contact(),
+      new Contact()
+    ]*/
   }
 
   onRouteChanged(map: ParamMap) {
-    const token = map.get('token');
-    const decodedToken = this.authService.getDecodedAccessToken(token);
+    this.profile.token = map.get('token');
+    const decodedToken = this.authService.getDecodedAccessToken(this.profile.token );
     this.profile.email = decodedToken['email'];
-    //console.log(this.profile.email);
+    this.profile = newUser(this.profile.token, this.profile.email);
+    console.log(this.profile);
   }
 
   ngOnDestroy() {
@@ -41,5 +49,18 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       }
     }
   }
+  signUp() {
+    this.loading = true;
+    this.tierritasService.signUpMember(this.profile).subscribe(response => {
+      if (response.status === 'success') {
+        this.loading = false;
+        this.authService.setUser(response);
+      }
+    }, error => {
+      console.error(error);
+      this.loading = false;
+    });
+  }
 
 }
+
