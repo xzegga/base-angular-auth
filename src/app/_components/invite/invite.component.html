@@ -16,7 +16,7 @@
             </tr>
             <tr *ngFor='let invite of invites; let i = index'>
                 <td class="iconEdit">
-                    <input [(ngModel)]="invite.email" type="email" />
+                    <input [(ngModel)]="invite.email" type="email" email />
                     <div class="checkboxT">
                         <label class="check-lbl"><input type="checkbox" name="checkbox" [(ngModel)]="invite.isAdmin" />&nbsp;Admin</label>
                     </div>

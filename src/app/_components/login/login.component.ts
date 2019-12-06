@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginComponent implements OnInit {
   model: any = {};
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private route: Router
   ) {}
 
   ngOnInit() {
@@ -29,6 +31,10 @@ export class LoginComponent implements OnInit {
       console.error(error);
       this.loading = false;
     });
+  }
+
+  forgotPass(){
+    this.route.navigateByUrl('forgot-password');
   }
 
 }
