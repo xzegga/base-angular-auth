@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Profile } from 'src/app/_models/user';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-members',
@@ -16,6 +17,8 @@ export class MembersComponent implements OnInit {
   currentProfileId: string;
   filterString = '';
   isProfileAdmin = false;
+  faArrowLeft = faArrowLeft;
+  hidden = false;
 
   constructor(
     private tierritasService: TierritasService,

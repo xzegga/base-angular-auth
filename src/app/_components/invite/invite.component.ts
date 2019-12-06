@@ -1,7 +1,7 @@
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Invite } from './../../_models/user';
 import { Component, OnInit } from '@angular/core';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-invite',
@@ -12,6 +12,8 @@ export class InviteComponent implements OnInit {
   public loading = false;
   faPlus = faPlus;
   faMinus = faMinus;
+  faArrowLeft = faArrowLeft;
+  hidden = false;
   invites: Array<Invite> = [];
 
   constructor(private tierritasService: TierritasService) { }
