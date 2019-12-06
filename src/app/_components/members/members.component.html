@@ -1,14 +1,15 @@
 <div class="maxw avatarheader">
     <div class="goback flex hBetween">
-            <a class="flex hCenter vCenter" href="javascript:history.go(-1)">
-                <fa-icon [icon]="faArrowLeft" [hidden]="hidden"></fa-icon>
-                <!-- <ion-icon name="arrow-round-back"></ion-icon> -->
-            </a>
-        </div>
+        <a class="flex hCenter vCenter" href="javascript:history.go(-1)">
+            <fa-icon [icon]="faArrowLeft" [hidden]="hidden"></fa-icon>
+            <!-- <ion-icon name="arrow-round-back"></ion-icon> -->
+        </a>
+    </div>
     <div class="searchico"><img src="assets/search.png" alt=""></div>
     <div class="search flex">
         <input type="search" [(ngModel)]="filterString">
     </div>
+    <div (click)="editProfile()">Editar Perfil </div>
 </div>
 <ngx-loading [show]="loading"></ngx-loading>
 <div class="editcontent">

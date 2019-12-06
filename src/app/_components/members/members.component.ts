@@ -14,7 +14,7 @@ export class MembersComponent implements OnInit {
   members: Profile[];
   public loading = false;
   currentProfile: Profile;
-  currentProfileId: string;
+  currentProfileId: number;
   filterString = '';
   isProfileAdmin = false;
   faArrowLeft = faArrowLeft;
@@ -33,7 +33,6 @@ export class MembersComponent implements OnInit {
     this.loading = true;
     this.tierritasService.getMembers()
     .subscribe((members: Profile[]) => {
-      console.log(members)
       this.members = members;
       this.getCurrentProfileId(members);
       this.loading = false;
@@ -44,12 +43,17 @@ export class MembersComponent implements OnInit {
     const token = this.auth.getJwtToken();
     const currentProf = this.auth.getDecodedAccessToken(token);
     this.currentProfileId = currentProf.user_id;
+    console.log(this.currentProfileId, members)
     this.isProfileAdmin = currentProf.isAdmin;
-    this.currentProfile = members.filter((profile: Profile) => profile.id == this.currentProfileId)[0];
+    this.currentProfile = members.filter((profile: Profile) => profile.id === this.currentProfileId)[0];
   }
 
-  showProfile(profileId: string){
+  showProfile(profileId: number){
     this.router.navigateByUrl(`profile/${profileId}`);
+  }
+
+  editProfile(){
+    this.router.navigateByUrl('edit-profile');
   }
 
   invite() {
