@@ -1,4 +1,10 @@
 <ngx-loading [show]="loading"></ngx-loading>
+<div class="goback flex hBetween">
+        <a class="flex hCenter vCenter" href="javascript:history.go(-1)">
+            <fa-icon [icon]="faArrowLeft" [hidden]="hidden"></fa-icon>
+            <!-- <ion-icon name="arrow-round-back"></ion-icon> -->
+        </a>
+    </div>
 <div class="logo">
     <img src="assets/logo.png" alt="">
 </div>
@@ -14,6 +20,7 @@
                     <div class="checkboxT">
                         <label class="check-lbl"><input type="checkbox" name="checkbox" [(ngModel)]="invite.isAdmin" />&nbsp;Admin</label>
                     </div>
+                    <p class = "text"></p>
                     <div class="boxMin">
                         <div class="plus-icon" *ngIf="i === invites.length -1">
                             <fa-icon [icon]="faPlus" (click)="addNewInvite()"></fa-icon>

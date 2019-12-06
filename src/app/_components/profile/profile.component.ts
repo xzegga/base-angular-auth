@@ -1,6 +1,7 @@
 import { TierritasService } from './../../_services/tierritas.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { Profile } from 'src/app/_models/user';
 
@@ -12,6 +13,8 @@ import { Profile } from 'src/app/_models/user';
 export class ProfileComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription> = [];
   profile: Profile;
+  faArrowLeft = faArrowLeft;
+  hidden = false;
   public loading = false;
 
   constructor(public activatedRoute: ActivatedRoute, private tierritasService: TierritasService) { }
