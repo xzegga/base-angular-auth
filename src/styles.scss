@@ -600,7 +600,6 @@ input[type=search] {
     border-top: 1px solid #e6e6e6;
 }
 
-
 .goback a {
     width: 40px;
     height: 40px;
@@ -709,20 +708,6 @@ input[type=search] {
     position: relative;
 }
 
-.logout fa-icon {
-    position: absolute;
-    right: 15px;
-    top: 20px;
-    font-size: 2rem;
-    color: white;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    border-radius: 50%;
-    border: 2px solid white;
-    padding: 5px 10px;
-}
-
 .formContent button.invalid {
     background: gray;
     opacity: 0.5;
@@ -736,4 +721,16 @@ input[type=search] {
     padding: 7px 10px;
     color: #ffffff;
     background: #7bbcf1;
+}
+
+.e-control {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.e-input-group {
+    background-color: #fff !important;
+    width: 100%;
+    padding: 0 10px !important;
+    margin-bottom: 10px;
 }

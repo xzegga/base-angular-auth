@@ -1,0 +1,5 @@
+<div class="header"></div>
+<div class="maxw logout">
+    <fa-icon [icon]="faArrowLeft" (click)="backClicked()" class="back" [class.hidden]="!backVisible"></fa-icon>
+    <fa-icon [icon]="faSignOutAlt" (click)="logout()" class="close" [class.hidden]="!sessionVisible"></fa-icon>
+</div>

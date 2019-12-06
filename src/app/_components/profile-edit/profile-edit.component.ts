@@ -8,21 +8,26 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  templateUrl: './profile-edit.component.html',
+  styleUrls: ['./profile-edit.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class ProfileEditComponent implements OnInit {
 
   public loading = false;
   profile: Profile = new Profile();
   currentId: string;
   faPlus = faPlus;
   currentProfileId: any;
+  dateValue: Date;
+  public maxDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+  currentRoute: string;
 
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
               private route: Router,
-              private auth: AuthService) { }
+              private auth: AuthService) {
+                this.currentRoute = this.route.url;
+               }
 
 
   ngOnInit() {
@@ -37,6 +42,7 @@ export class EditProfileComponent implements OnInit {
 
     this.tierritasService.getProfile(this.currentProfileId).subscribe(profile => {
       this.profile = profile;
+      this.dateValue = new Date (this.profile.birthdate);
       if (this.profile.hasOwnProperty('contacts')) {
         if (this.profile.contacts.length === 0) {
           this.profile.contacts = [];
@@ -47,9 +53,11 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-
   editUser() {
-    // do something
+    if (this.profile.health_insurance_type === 'ISSS') {
+      this.profile.insurance_company = '';
+      this.profile.insurance_policy = '';
+    }
   }
 
   addNewContact() {

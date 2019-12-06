@@ -20,7 +20,10 @@ import { TokenInterceptor } from './_services/token-interceptor';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { FilterListPipe } from './_utils/filter-list.pipe';
 import { ForgotPasswordComponent } from './_components/forgot-password/forgot-password.component';
-import { EditProfileComponent } from './_components/edit-profile/edit-profile.component';
+import { ProfileEditComponent } from './_components/profile-edit/profile-edit.component';
+
+import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { HeaderComponent } from './_components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { EditProfileComponent } from './_components/edit-profile/edit-profile.co
     CreateAccountComponent,
     FilterListPipe,
     ForgotPasswordComponent,
-    EditProfileComponent
+    ProfileEditComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import { EditProfileComponent } from './_components/edit-profile/edit-profile.co
       backdropBorderRadius: '4px',
       primaryColour: '#ffffff',
       secondaryColour: '#ffffff',
-      tertiaryColour: '#ffffff'})
+      tertiaryColour: '#ffffff'}),
+    DatePickerModule
   ],
   providers: [
     {

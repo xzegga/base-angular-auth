@@ -14,8 +14,11 @@ export class ResetPasswordComponent implements OnInit {
   password: ResetPassword = new ResetPassword();
   subscriptions: Array<Subscription> = [];
   token: string;
+  currentRoute: string;
 
-  constructor(private tierritasService: TierritasService, private activatedRoute: ActivatedRoute, private route: Router) { }
+  constructor(private tierritasService: TierritasService, private activatedRoute: ActivatedRoute, private route: Router) {
+    this.currentRoute = this.route.url;
+   }
 
   ngOnInit() {
     const routeSubscription = this.activatedRoute.paramMap.subscribe(map => {

@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public loading = false;
   model: any = {};
+  currentRoute: string;
 
   constructor(
     private authService: AuthService,
     private route: Router
-  ) {}
+  ) {
+    this.currentRoute = this.route.url;
+  }
 
   ngOnInit() {
     this.authService.logout();

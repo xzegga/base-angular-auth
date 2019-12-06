@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Invite } from './../../_models/user';
 import { Component, OnInit } from '@angular/core';
-import { faPlus, faMinus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-invite',
@@ -12,11 +13,13 @@ export class InviteComponent implements OnInit {
   public loading = false;
   faPlus = faPlus;
   faMinus = faMinus;
-  faArrowLeft = faArrowLeft;
   hidden = false;
   invites: Array<Invite> = [];
+  currentRoute: any;
 
-  constructor(private tierritasService: TierritasService) { }
+  constructor(private tierritasService: TierritasService, private route: Router) {
+    this.currentRoute = this.route.url;
+  }
 
   ngOnInit() {
     this.addNewInvite();

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Profile } from 'src/app/_models/user';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-members',
@@ -17,13 +17,17 @@ export class MembersComponent implements OnInit {
   currentProfileId: number;
   filterString = '';
   isProfileAdmin = false;
-  faArrowLeft = faArrowLeft;
   hidden = false;
+  faEdit = faEdit;
+  currentRoute: string;
 
   constructor(
     private tierritasService: TierritasService,
     private router: Router,
-    private auth: AuthService) { }
+    private auth: AuthService) {
+      this.currentRoute = this.router.url;
+      console.log(this.currentRoute)
+    }
 
   ngOnInit() {
     this.getMembers();
@@ -41,19 +45,20 @@ export class MembersComponent implements OnInit {
 
   getCurrentProfileId(members: Profile[]) {
     const token = this.auth.getJwtToken();
-    const currentProf = this.auth.getDecodedAccessToken(token);
-    this.currentProfileId = currentProf.user_id;
-    console.log(this.currentProfileId, members)
-    this.isProfileAdmin = currentProf.isAdmin;
-    this.currentProfile = members.filter((profile: Profile) => profile.id === this.currentProfileId)[0];
+    if (token) {
+      const currentProf = this.auth.getDecodedAccessToken(token);
+      this.currentProfileId = currentProf.user_id;
+      this.isProfileAdmin = currentProf.isAdmin;
+      this.currentProfile = members.filter((profile: Profile) => profile.id === this.currentProfileId)[0];
+    }
   }
 
   showProfile(profileId: number){
     this.router.navigateByUrl(`profile/${profileId}`);
   }
 
-  editProfile(){
-    this.router.navigateByUrl('edit-profile');
+  profileEdit(){
+    this.router.navigateByUrl('profile-edit');
   }
 
   invite() {

@@ -1,11 +1,6 @@
+<app-header [currentRoute]="currentRoute"></app-header>
 <ngx-loading [show]="loading"></ngx-loading>
 <div class="maxw avatarheader">
-    <div class="goback flex hBetween">
-        <a class="flex hCenter vCenter" href="javascript:history.go(-1)">
-            <fa-icon [icon]="faArrowLeft" [hidden]="hidden"></fa-icon>
-            <!-- <ion-icon name="arrow-round-back"></ion-icon> -->
-        </a>
-    </div>
     <div class="avatar"><img src="assets/avatar.png" alt=""></div>
 </div>
 
@@ -15,8 +10,8 @@
     <div class="maxw profileContent">
         <h1>{{profile?.first_name}} {{profile?.last_name}}</h1>
         <div class="editbuton">
-            <a class="iconEdit" ion-button (click)="navEdit()">
-                <!-- <ion-icon name="create"></ion-icon> Editar perfil -->
+            <a class="iconEdit" (click)="profileEdit()" *ngIf="profileId == currentProfileId">
+                Modifica tus datos <fa-icon [icon]="faEdit"></fa-icon>
             </a>
         </div>
 

@@ -1,6 +1,7 @@
+<app-header [currentRoute]="currentRoute"></app-header>
 <ngx-loading [show]="loading"></ngx-loading>
-<div class="logo">
-    <img src="assets/logo.png" alt="">
+<div class="maxw avatarheader">
+    <div class="avatar"><img src="assets/avatar.png" alt=""></div>
 </div>
 <div class="maxw formContent register">
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
@@ -17,32 +18,32 @@
         <div class="line"></div>
 
         <label for="">Fecha de nacimiento:</label>
-        <input type="text" name="birthdate" placeholder="Fecha de nacimiento" [(ngModel)]="profile.birthdate" required>
+        <ejs-datepicker id='datepicker' [cssClass]="dateinput" [allowEdit]="true" [format]="'dd-MM-yyyy'" [max]="maxDate" placeholder='Selecciona una fecha' [value]='profile.birthdate'></ejs-datepicker>
 
         <label for="">Tipo de sangre:</label>
         <input type="text" name="bloodtype" placeholder="Tipo de sangre" [(ngModel)]="profile.bloodtype" required>
 
-        <label for=" ">DUI:</label>
-        <input type="text " name="dui " placeholder="DUI " [(ngModel)]="profile.dui " required>
+        <label for="">DUI:</label>
+        <input type="text" name="dui" placeholder="DUI" [(ngModel)]="profile.dui" required>
 
-        <label for=" ">Teléfono:</label>
-        <input type="tel " name="phone " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
+        <label for="">Teléfono:</label>
+        <input type="tel" name="phone" placeholder="Teléfono" [(ngModel)]="profile.phone" required>
 
-        <label for=" ">Tipo de seguro:</label>
-        <select id="tseguro">
-        <option value=" ">Seleccione</option>
-        <option value="ISSS">ISSS</option>
-        <option value="poliza">Póliza</option>
-      </select>
-        <div id="sPoliza ">
-            <label for=" ">Aseguradora:</label>
-            <input type="text " id="seguro " disabled="true ">
-            <label for=" ">Póliza:</label>
-            <input type="text " id="poliza " disabled="true ">
+        <label for="">Tipo de seguro:</label>
+        <select id="tseguro" name="health_insurance_type" [(ngModel)]="profile.health_insurance_type" (change)="changeInsurance($event.target.value)">
+          <option value="">Seleccione</option>
+          <option value="ISSS">ISSS</option>
+          <option value="Privado">Privado</option>
+        </select>
+        <div id="sPoliza" *ngIf="profile.health_insurance_type === 'Privado'">
+            <label for="">Aseguradora:</label>
+            <input type="text" id="insurance_company" name="insurance_company" [(ngModel)]="profile.insurance_company">
+            <label for="">Póliza:</label>
+            <input type="text" id="insurance_policy" name="insurance_policy" [(ngModel)]="profile.insurance_policy">
         </div>
 
-        <div class="line "></div>
-        <div class="contacts ">
+        <div class="line"></div>
+        <div class="contacts">
 
             Contactos en caso de emergencia
             <div class="plus-icon" (click)="addNewContact()">

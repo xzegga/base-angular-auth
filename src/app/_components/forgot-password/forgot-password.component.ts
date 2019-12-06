@@ -1,6 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TierritasService } from 'src/app/_services/tierritas.service';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-forgot-password',
@@ -10,10 +10,12 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 export class ForgotPasswordComponent implements OnInit {
   public loading = false;
   email = '';
-  faArrowLeft = faArrowLeft;
   hidden = false;
+  currentRoute: any;
 
-  constructor(private tierritasService: TierritasService) { }
+  constructor(private tierritasService: TierritasService, private route: Router) {
+    this.currentRoute = this.route.url;
+  }
 
   ngOnInit() {
   }

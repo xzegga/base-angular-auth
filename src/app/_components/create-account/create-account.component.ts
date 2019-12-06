@@ -14,11 +14,14 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   public loading = false;
   subscriptions: Array<Subscription> = [];
   profile: Profile = new Profile();
+  currentRoute: string;
 
-  constructor(public activatedRoute: ActivatedRoute, 
-    private authService: AuthService, 
-    private tierritasService: TierritasService,
-    private route: Router) { }
+  constructor(public activatedRoute: ActivatedRoute,
+              private authService: AuthService,
+              private tierritasService: TierritasService,
+              private route: Router) {
+      this.currentRoute = this.route.url;
+     }
 
 
   ngOnInit() {
@@ -47,8 +50,8 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
         }else {
           this.route.navigateByUrl('login')
         }
-      } 
-    )    
+      }
+    )
   }
 
   ngOnDestroy() {
@@ -60,6 +63,13 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   }
   signUp() {
     this.loading = true;
+
+    // Cleaning some data
+    if (this.profile.health_insurance_type === 'ISSS') {
+      this.profile.insurance_company = '';
+      this.profile.insurance_policy = '';
+    }
+
     this.tierritasService.signUpMember(this.profile).subscribe(response => {
       if (response.status === 'success') {
         this.loading = false;

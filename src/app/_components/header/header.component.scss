@@ -1,0 +1,31 @@
+.logout fa-icon.back {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    font-size: 2rem;
+    color: white;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid white;
+    padding: 5px 10px;
+}
+
+.logout fa-icon.close {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    font-size: 2rem;
+    color: white;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid white;
+    padding: 5px 10px;
+}
+
+.hidden {
+    display: none;
+}
