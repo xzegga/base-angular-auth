@@ -1,3 +1,4 @@
+import { EditProfileComponent } from './_components/edit-profile/edit-profile.component';
 import { ForgotPasswordComponent } from './_components/forgot-password/forgot-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: 'invite',
     canActivate: [AuthGuard],
     component: InviteComponent
+  },
+  {
+    path: 'edit-profile',
+    canActivate: [AuthGuard],
+    component: EditProfileComponent,
   },
   {
     path: 'forgot-password',

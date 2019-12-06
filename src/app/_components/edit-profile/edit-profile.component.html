@@ -1,0 +1,60 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="logo">
+    <img src="assets/logo.png" alt="">
+</div>
+<div class="maxw formContent register">
+    <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
+    <form (ngSubmit)="editUser()" #form="ngForm" autocomplete="off" action="">
+        <label for="">Correo electrónico:</label>
+        <div class="fakeFormField">{{profile?.email}}</div>
+
+        <label for="">Nombres:</label>
+        <input type="text" name="first_name" placeholder="Nombres" [(ngModel)]="profile.first_name" required>
+
+        <label for="">Apellidos:</label>
+        <input type="text" name="last_name" placeholder="Apellidos" [(ngModel)]="profile.last_name" required>
+
+        <div class="line"></div>
+
+        <label for="">Fecha de nacimiento:</label>
+        <input type="text" name="birthdate" placeholder="Fecha de nacimiento" [(ngModel)]="profile.birthdate" required>
+
+        <label for="">Tipo de sangre:</label>
+        <input type="text" name="bloodtype" placeholder="Tipo de sangre" [(ngModel)]="profile.bloodtype" required>
+
+        <label for=" ">DUI:</label>
+        <input type="text " name="dui " placeholder="DUI " [(ngModel)]="profile.dui " required>
+
+        <label for=" ">Teléfono:</label>
+        <input type="tel " name="phone " placeholder="Teléfono " [(ngModel)]="profile.phone " required>
+
+        <label for=" ">Tipo de seguro:</label>
+        <select id="tseguro">
+        <option value=" ">Seleccione</option>
+        <option value="ISSS">ISSS</option>
+        <option value="poliza">Póliza</option>
+      </select>
+        <div id="sPoliza ">
+            <label for=" ">Aseguradora:</label>
+            <input type="text " id="seguro " disabled="true ">
+            <label for=" ">Póliza:</label>
+            <input type="text " id="poliza " disabled="true ">
+        </div>
+
+        <div class="line "></div>
+        <div class="contacts ">
+
+            Contactos en caso de emergencia
+            <div class="plus-icon" (click)="addNewContact()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+            </div>
+            <div *ngFor="let contact of profile.contacts">
+                <input type="hidden" [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.id">
+                <input type="text" [ngModelOptions]="{standalone: true}" placeholder="Nombre" [(ngModel)]="contact.name">
+                <input type="text" [ngModelOptions]="{standalone: true}" placeholder="Teléfono" [(ngModel)]="contact.phone">
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="!form.valid" [ngClass]="{'invalid': !form.valid}">REGISTRARSE</button>
+    </form>
+</div>

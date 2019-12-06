@@ -20,6 +20,7 @@ import { TokenInterceptor } from './_services/token-interceptor';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { FilterListPipe } from './_utils/filter-list.pipe';
 import { ForgotPasswordComponent } from './_components/forgot-password/forgot-password.component';
+import { EditProfileComponent } from './_components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ForgotPasswordComponent } from './_components/forgot-password/forgot-pa
     ResetPasswordComponent,
     CreateAccountComponent,
     FilterListPipe,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
