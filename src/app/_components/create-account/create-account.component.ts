@@ -11,8 +11,9 @@ import { Profile, Contact, newUser} from 'src/app/_models/user';
   styleUrls: ['./create-account.component.scss']
 })
 export class CreateAccountComponent implements OnInit, OnDestroy {
-  public loading = false;
+  public loading: boolean;
   subscriptions: Array<Subscription> = [];
+
   profile: Profile = new Profile();
   currentRoute: string;
 
@@ -29,8 +30,11 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       this.onRouteChanged(map);
     });
 
+    const loadingSubscription = this.authService.loading$.subscribe((loading: boolean) => this.loading = loading);
+
     this.subscriptions = [
-      routeSubscription
+      routeSubscription,
+      loadingSubscription
     ];
 
     this.profile.contacts = [
@@ -45,9 +49,8 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     this.tierritasService.validateInviteToken(this.profile.token).subscribe(response => {
         if(response === 'valid'){
           const decodedToken = this.authService.getDecodedAccessToken(this.profile.token );
-          this.profile.email = decodedToken['email'];
-          //this.profile = newUser(this.profile.token, this.profile.email);
-        }else {
+          this.profile.email = decodedToken.email;
+        } else {
           this.route.navigateByUrl('login')
         }
       }
@@ -61,9 +64,9 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       }
     }
   }
-  signUp() {
-    this.loading = true;
 
+  signUp() {
+    this.authService.setLoading(true);
     // Cleaning some data
     if (this.profile.health_insurance_type === 'ISSS') {
       this.profile.insurance_company = '';
@@ -72,13 +75,16 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
 
     this.tierritasService.signUpMember(this.profile).subscribe(response => {
       if (response.status === 'success') {
-        this.loading = false;
+        this.authService.setLoading(false);
         this.authService.setUser(response);
       }
-    }, error => {
-      console.error(error);
-      this.loading = false;
     });
+  }
+
+  addNewContact() {
+    if (this.profile.contacts.length < 3) {
+      this.profile.contacts.push(new Contact());
+    }
   }
 
 }

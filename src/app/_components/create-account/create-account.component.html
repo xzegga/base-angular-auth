@@ -50,19 +50,16 @@
 
         <div class="line"></div>
         <div class="contacts">
-            <p>Contactos en caso de emergencia</p>
-            <div class="">
-                <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[0].name">
-                <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[0].phone">
+            <div class="flex">
+                <div class="flex-item-auto">
+                    Contactos en caso de emergencia
+                </div>
             </div>
-            <div class="">
-                <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[1].name">
-                <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[1].phone">
+            <div *ngFor="let contact of profile.contacts">
+                <input type="text" [ngModelOptions]="{standalone: true}" placeholder="Nombre" [(ngModel)]="contact.name">
+                <input type="text" [ngModelOptions]="{standalone: true}" placeholder="Teléfono" [(ngModel)]="contact.phone">
             </div>
-            <div class="">
-                <input type="text" name="name" placeholder="Nombre" [(ngModel)]="profile.contacts[2].name">
-                <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.contacts[2].phone">
-            </div>
+
         </div>
 
         <button type="submit" [disabled]="submitted || !form.valid" [ngClass]="{'invalid': !form.valid}">REGISTRARSE</button>

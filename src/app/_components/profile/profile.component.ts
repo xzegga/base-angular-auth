@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
-              private auth: AuthService,
+              private authService: AuthService,
               private router: Router) {
                 this.currentRoute = this.router.url;
               }
@@ -33,18 +33,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.onRouteChanged(map);
     });
 
+    const loadingSubscription = this.authService.loading$.subscribe((loading: boolean) => this.loading = loading);
+
     this.subscriptions = [
-      routeSubscription
+      routeSubscription,
+      loadingSubscription
     ];
   }
 
   onRouteChanged(map: ParamMap) {
-    this.loading = true;
+
     this.profileId = map.get('profileId');
+    this.authService.setLoading(true);
     this.tierritasService.getProfile(this.profileId).subscribe(profile => {
       this.profile = profile;
       this.getCurrentProfileId();
-      this.loading = false;
+      this.authService.setLoading(false);
     });
   }
 
@@ -53,9 +57,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getCurrentProfileId() {
-    const token = this.auth.getJwtToken();
+    const token = this.authService.getJwtToken();
     if (token) {
-      const currentProf = this.auth.getDecodedAccessToken(token);
+      const currentProf = this.authService.getDecodedAccessToken(token);
       this.currentProfileId = currentProf.user_id;
     }
   }

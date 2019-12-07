@@ -18,7 +18,7 @@ export class FilterListPipe implements PipeTransform {
         let match = false;
 
         Object.keys(v).forEach(k => {
-            console.log(v[k]);
+            // console.log(v[k]);
             if (typeof v[k] === 'string') {
                 match = match || v[k].toLowerCase().indexOf(filter.toLowerCase()) >= 0;
             } else {

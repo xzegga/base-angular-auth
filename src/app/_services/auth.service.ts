@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, of, Subject } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { LoginResponse } from '../_models/user';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ export class AuthService {
 
   // API path
   basePath = environment.api_url;
+  loading$ = new Subject();
 
   constructor(
     private router: Router,
@@ -29,7 +30,7 @@ export class AuthService {
 
   // Handle API errors
   handleError(error: HttpErrorResponse) {
-    console.log(error);
+
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -100,6 +101,10 @@ export class AuthService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  setLoading(loading: boolean){
+    this.loading$.next(loading);
   }
 
 }

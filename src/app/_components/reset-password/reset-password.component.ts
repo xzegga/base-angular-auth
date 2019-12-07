@@ -1,5 +1,6 @@
+import { AuthService } from './../../_services/auth.service';
 import { TierritasService } from 'src/app/_services/tierritas.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {ResetPassword} from '../../_models/user';
@@ -9,39 +10,51 @@ import {ResetPassword} from '../../_models/user';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
-  public loading = false;
-  password: ResetPassword = new ResetPassword();
+export class ResetPasswordComponent implements OnInit, OnDestroy {
+  public loading: boolean;
   subscriptions: Array<Subscription> = [];
+
+  password: ResetPassword = new ResetPassword();
   token: string;
   currentRoute: string;
 
-  constructor(private tierritasService: TierritasService, private activatedRoute: ActivatedRoute, private route: Router) {
-    this.currentRoute = this.route.url;
+  constructor(
+    private tierritasService: TierritasService,
+    private activatedRoute: ActivatedRoute,
+    private route: Router,
+    private authService: AuthService) {
+      this.currentRoute = this.route.url;
    }
 
   ngOnInit() {
+
+    const loadingSubscription = this.authService.loading$.subscribe((loading: boolean) => this.loading = loading);
     const routeSubscription = this.activatedRoute.paramMap.subscribe(map => {
       this.onRouteChanged(map);
     });
 
+
     this.subscriptions = [
-      routeSubscription
+      routeSubscription,
+      loadingSubscription
     ];
   }
 
   resetPassword(){
+    this.authService.setLoading(true);
     this.tierritasService.resetPassword(this.password).subscribe(response => {
-      console.log(response);
+      this.authService.setLoading(false);
     });
   }
 
   onRouteChanged(map: ParamMap) {
     this.password.token = map.get('token');
+    this.authService.setLoading(true);
     this.tierritasService.validateInviteToken(this.password.token).subscribe(response => {
         if (response === 'invalid') {
            this.route.navigateByUrl('login');
         }
+        this.authService.setLoading(false);
       }
     )
   }

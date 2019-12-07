@@ -1,5 +1,5 @@
 import { AuthService } from './../../_services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TierritasService } from 'src/app/_services/tierritas.service';
@@ -11,9 +11,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss']
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
 
-  public loading = false;
+  public loading: boolean;
+  subscriptions: Array<Subscription> = [];
+
   profile: Profile = new Profile();
   currentId: string;
   faPlus = faPlus;
@@ -25,21 +27,26 @@ export class ProfileEditComponent implements OnInit {
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
               private route: Router,
-              private auth: AuthService) {
+              private authService: AuthService) {
                 this.currentRoute = this.route.url;
                }
 
 
   ngOnInit() {
-    this.getCurrentProfileId();
+    const loadingSubscription = this.authService.loading$.subscribe((loading: boolean) => this.loading = loading);
+    this.subscriptions = [
+      loadingSubscription
+    ];
 
+    this.getCurrentProfileId();
   }
 
   getCurrentProfileId() {
-    const token = this.auth.getJwtToken();
-    const currentProf = this.auth.getDecodedAccessToken(token);
+    const token = this.authService.getJwtToken();
+    const currentProf = this.authService.getDecodedAccessToken(token);
     this.currentProfileId = currentProf.user_id;
 
+    this.authService.setLoading(true);
     this.tierritasService.getProfile(this.currentProfileId).subscribe(profile => {
       this.profile = profile;
       this.dateValue = new Date (this.profile.birthdate);
@@ -50,6 +57,7 @@ export class ProfileEditComponent implements OnInit {
       } else {
         this.profile.contacts = [];
       }
+      this.authService.setLoading(false);
     });
   }
 
@@ -58,6 +66,10 @@ export class ProfileEditComponent implements OnInit {
       this.profile.insurance_company = '';
       this.profile.insurance_policy = '';
     }
+    this.authService.setLoading(true);
+    this.tierritasService.saveMember(this.profile).subscribe(response => {
+      this.authService.setLoading(false);
+    });
   }
 
   addNewContact() {
@@ -66,4 +78,12 @@ export class ProfileEditComponent implements OnInit {
     }
   }
 
+
+  ngOnDestroy() {
+    for (const sub of this.subscriptions) {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    }
+  }
 }

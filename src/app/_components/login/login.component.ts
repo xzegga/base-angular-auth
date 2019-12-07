@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  public loading = false;
+export class LoginComponent implements OnInit, OnDestroy {
+  public loading: boolean;
+  subscriptions: Array<Subscription> = [];
+
   model: any = {};
   currentRoute: string;
 
@@ -20,24 +23,34 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.logout();
+    const loadingSubscription = this.authService.loading$.subscribe((loading: boolean) => {
+      this.loading = loading;
+    });
+    this.subscriptions = [
+      loadingSubscription
+    ];
   }
 
   login() {
-    this.loading = true;
-    this.authService.loginForm(this.model).subscribe(response => {
-      if (response.status === 'success') {
-        this.loading = false;
-        this.authService.setUser(response);
-      }
-    }, error => {
-      console.error(error);
-      this.loading = false;
-    });
+    this.authService.setLoading(true);
+    this.authService.loginForm(this.model).subscribe(
+      response => {
+          if (response.status === 'success') {
+            this.authService.setLoading(false);
+            this.authService.setUser(response);
+          }
+      });
   }
 
   forgotPass(){
     this.route.navigateByUrl('forgot-password');
   }
 
+  ngOnDestroy() {
+    for (const sub of this.subscriptions) {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    }
+  }
 }

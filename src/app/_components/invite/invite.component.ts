@@ -1,28 +1,39 @@
+import { AuthService } from './../../_services/auth.service';
 import { Router } from '@angular/router';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Invite } from './../../_models/user';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-invite',
   templateUrl: './invite.component.html',
   styleUrls: ['./invite.component.scss']
 })
-export class InviteComponent implements OnInit {
-  public loading = false;
+export class InviteComponent implements OnInit, OnDestroy {
+  public loading: boolean;
+  subscriptions: Array<Subscription> = [];
+
   faPlus = faPlus;
   faMinus = faMinus;
   hidden = false;
   invites: Array<Invite> = [];
   currentRoute: any;
 
-  constructor(private tierritasService: TierritasService, private route: Router) {
+  constructor(private tierritasService: TierritasService,
+              private route: Router,
+              private authService: AuthService) {
     this.currentRoute = this.route.url;
   }
 
   ngOnInit() {
     this.addNewInvite();
+
+    const loadingSubscription = this.authService.loading$.subscribe((loading: boolean) => this.loading = loading);
+    this.subscriptions = [
+      loadingSubscription
+    ];
   }
 
   addNewInvite(){
@@ -34,9 +45,17 @@ export class InviteComponent implements OnInit {
   }
 
   sendInvites() {
+    this.authService.setLoading(true);
     this.invites.forEach( (invite: Invite) => {
-        this.tierritasService.sendInvite(invite).subscribe();
+        this.tierritasService.sendInvite(invite).subscribe(response => this.authService.setLoading(false));
     });
   }
 
+  ngOnDestroy() {
+    for (const sub of this.subscriptions) {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    }
+  }
 }

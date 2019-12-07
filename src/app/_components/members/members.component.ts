@@ -1,18 +1,21 @@
 import { AuthService } from './../../_services/auth.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Profile } from 'src/app/_models/user';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })
-export class MembersComponent implements OnInit {
+export class MembersComponent implements OnInit, OnDestroy {
   members: Profile[];
-  public loading = false;
+  public loading: boolean;
+  subscriptions: Array<Subscription> = [];
+
   currentProfile: Profile;
   currentProfileId: number;
   filterString = '';
@@ -24,29 +27,34 @@ export class MembersComponent implements OnInit {
   constructor(
     private tierritasService: TierritasService,
     private router: Router,
-    private auth: AuthService) {
+    private authService: AuthService) {
       this.currentRoute = this.router.url;
-      console.log(this.currentRoute)
     }
 
   ngOnInit() {
+    const loadingSubscription = this.authService.loading$.subscribe((loading: boolean) => this.loading = loading);
+    this.subscriptions = [
+      loadingSubscription
+    ];
+
     this.getMembers();
+
   }
 
   getMembers(){
-    this.loading = true;
+    this.authService.setLoading(true);
     this.tierritasService.getMembers()
     .subscribe((members: Profile[]) => {
       this.members = members;
       this.getCurrentProfileId(members);
-      this.loading = false;
+      this.authService.setLoading(false);
     });
   }
 
   getCurrentProfileId(members: Profile[]) {
-    const token = this.auth.getJwtToken();
+    const token = this.authService.getJwtToken();
     if (token) {
-      const currentProf = this.auth.getDecodedAccessToken(token);
+      const currentProf = this.authService.getDecodedAccessToken(token);
       this.currentProfileId = currentProf.user_id;
       this.isProfileAdmin = currentProf.isAdmin;
       this.currentProfile = members.filter((profile: Profile) => profile.id === this.currentProfileId)[0];
@@ -63,5 +71,13 @@ export class MembersComponent implements OnInit {
 
   invite() {
     this.router.navigateByUrl('invite');
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subscriptions) {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    }
   }
 }

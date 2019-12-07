@@ -11,6 +11,10 @@
     display: flex;
 }
 
+.flex-item-auto {
+    flex: 1;
+}
+
 
 /* Property: flex-direction
   Description: This establishes the main-axis, thus defining the direction flex items are placed in the flex container.
@@ -728,9 +732,32 @@ input[type=search] {
     display: block;
 }
 
+.boxMin {
+    min-width: 35px;
+}
+
 .e-input-group {
     background-color: #fff !important;
     width: 100%;
     padding: 0 10px !important;
     margin-bottom: 10px;
+}
+
+.plus-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.backdrop,
+.spinner-three-bounce {
+    position: fixed !important;
 }

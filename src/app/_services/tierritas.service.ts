@@ -55,6 +55,15 @@ export class TierritasService {
     );
   }
 
+  saveMember(profile: Profile){
+    const routeUrl = this.basePath + 'user/' + profile.id;
+    return this.http
+    .put<any>(routeUrl, profile, this.httpOptions)
+    .pipe(
+        catchError(this.handleError)
+    );
+  }
+
   validateInviteToken(token: string){
     return this.http
     .post<any>(this.basePath + `register/validate/${token}`, this.httpOptions)

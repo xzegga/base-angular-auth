@@ -44,10 +44,16 @@
 
         <div class="line"></div>
         <div class="contacts">
+            <div class="flex">
+                <div class="flex-item-auto">
+                    Contactos en caso de emergencia
+                </div>
+                <div class="boxMin">
+                    <div class="plus-icon" (click)="addNewContact()">
+                        <fa-icon [icon]="faPlus"></fa-icon>
+                    </div>
+                </div>
 
-            Contactos en caso de emergencia
-            <div class="plus-icon" (click)="addNewContact()">
-                <fa-icon [icon]="faPlus"></fa-icon>
             </div>
             <div *ngFor="let contact of profile.contacts">
                 <input type="hidden" [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.id">
