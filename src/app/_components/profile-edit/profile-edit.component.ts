@@ -66,6 +66,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       this.profile.insurance_company = '';
       this.profile.insurance_policy = '';
     }
+
+    const birdthdate = new Date(this.profile.birthdate);
+    this.profile.birthdate = birdthdate.getDate() + '-' + (birdthdate.getMonth() + 1) + '-' + birdthdate.getFullYear();
+
     this.authService.setLoading(true);
     this.tierritasService.saveMember(this.profile).subscribe(response => {
       this.authService.setLoading(false);

@@ -66,7 +66,7 @@ export class TierritasService {
 
   validateInviteToken(token: string){
     return this.http
-    .post<any>(this.basePath + `register/validate/${token}`, this.httpOptions)
+    .post<any>(this.basePath + `validate/${token}`, this.httpOptions)
     .pipe(
         catchError(this.handleError)
     );
