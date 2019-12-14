@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgot-password',
@@ -20,7 +21,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   constructor(
     private tierritasService: TierritasService,
     private route: Router,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private toastr: ToastrService) {
       this.currentRoute = this.route.url;
   }
 

@@ -5,6 +5,7 @@ import { Invite } from './../../_models/user';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-invite',
@@ -23,7 +24,8 @@ export class InviteComponent implements OnInit, OnDestroy {
 
   constructor(private tierritasService: TierritasService,
               private route: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private toastr: ToastrService) {
     this.currentRoute = this.route.url;
   }
 
@@ -47,7 +49,10 @@ export class InviteComponent implements OnInit, OnDestroy {
   sendInvites() {
     this.authService.setLoading(true);
     this.invites.forEach( (invite: Invite) => {
-        this.tierritasService.sendInvite(invite).subscribe(response => this.authService.setLoading(false));
+        this.tierritasService.sendInvite(invite).subscribe(response => {
+          this.authService.setLoading(false);
+          this.toastr.success('Listo!, se ha enviado un correo electrónico a tus invitados');
+        });
     });
   }
 

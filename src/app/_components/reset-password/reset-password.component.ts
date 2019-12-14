@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {ResetPassword} from '../../_models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -22,7 +23,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     private tierritasService: TierritasService,
     private activatedRoute: ActivatedRoute,
     private route: Router,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private toastr: ToastrService) {
       this.currentRoute = this.route.url;
    }
 
@@ -44,7 +46,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.authService.setLoading(true);
     this.tierritasService.resetPassword(this.password).subscribe(response => {
       this.authService.setLoading(false);
-    });
+    },
+    error => console.log(
+      this.toastr.error(error, 'Error')
+    ));
   }
 
   onRouteChanged(map: ParamMap) {
@@ -56,7 +61,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         }
         this.authService.setLoading(false);
       }
-    )
+    );
   }
 
   ngOnDestroy() {

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Profile, Contact } from 'src/app/_models/user';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-profile',
@@ -27,7 +28,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
               private route: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private toastr: ToastrService) {
                 this.currentRoute = this.route.url;
                }
 
@@ -73,6 +75,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.authService.setLoading(true);
     this.tierritasService.saveMember(this.profile).subscribe(response => {
       this.authService.setLoading(false);
+      this.toastr.success('Tus datos han sido actualizados con éxito', 'Enhorabuena');
     });
   }
 
@@ -89,5 +92,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         sub.unsubscribe();
       }
     }
+  }
+
+  onFileSelected(event){
+
   }
 }

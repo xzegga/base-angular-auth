@@ -1,7 +1,10 @@
 <app-header [currentRoute]="currentRoute"></app-header>
 <ngx-loading [show]="loading"></ngx-loading>
 <div class="maxw avatarheader">
-    <div class="avatar"><img src="assets/avatar.png" alt=""></div>
+    <div class="avatar">
+        <img src="assets/avatar.png" alt="">
+        <input type="file" (change)="onFileSelected($event)">
+    </div>
 </div>
 <div class="maxw formContent register">
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
@@ -30,7 +33,7 @@
         <input type="tel" name="phone" placeholder="Teléfono" [(ngModel)]="profile.phone" required>
 
         <label for="">Tipo de seguro:</label>
-        <select id="tseguro" name="health_insurance_type" [(ngModel)]="profile.health_insurance_type" (change)="changeInsurance($event.target.value)">
+        <select id="tseguro" name="health_insurance_type" [(ngModel)]="profile.health_insurance_type">
           <option value="">Seleccione</option>
           <option value="ISSS">ISSS</option>
           <option value="Privado">Privado</option>

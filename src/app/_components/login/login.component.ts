@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private route: Router
+    private route: Router,
+    private toastr: ToastrService
   ) {
     this.currentRoute = this.route.url;
   }
@@ -35,11 +37,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.setLoading(true);
     this.authService.loginForm(this.model).subscribe(
       response => {
-          if (response.status === 'success') {
             this.authService.setLoading(false);
             this.authService.setUser(response);
-          }
-      });
+    });
   }
 
   forgotPass(){

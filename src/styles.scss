@@ -3,6 +3,7 @@
   It enables a flex context for all its direct children..
   Apply to: Container */
 
+@import './assets/toastr';
 .flex {
     display: -webkit-box;
     display: -moz-box;

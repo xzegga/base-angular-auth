@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Profile, Contact, newUser} from 'src/app/_models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-account',
@@ -20,7 +21,8 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   constructor(public activatedRoute: ActivatedRoute,
               private authService: AuthService,
               private tierritasService: TierritasService,
-              private route: Router) {
+              private route: Router,
+              private toastr: ToastrService) {
       this.currentRoute = this.route.url;
      }
 
@@ -73,12 +75,14 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       this.profile.insurance_policy = '';
     }
 
-    this.tierritasService.signUpMember(this.profile).subscribe(response => {
-      if (response.status === 'success') {
-        this.authService.setLoading(false);
-        this.authService.setUser(response);
+    this.tierritasService.signUpMember(this.profile).subscribe(
+      response => {
+        if (response.status === 'success') {
+          this.authService.setLoading(false);
+          this.authService.setUser(response);
+        }
       }
-    });
+    );
   }
 
   addNewContact() {

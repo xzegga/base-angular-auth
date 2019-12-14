@@ -24,6 +24,8 @@ import { ProfileEditComponent } from './_components/profile-edit/profile-edit.co
 
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { HeaderComponent } from './_components/header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { HeaderComponent } from './_components/header/header.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -53,6 +56,11 @@ import { HeaderComponent } from './_components/header/header.component';
         whitelistedDomains: ['localhost:9000'],
         blacklistedRoutes: ['localhost/auth/login']
       }
+    }),
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
     }),
     NgxLoadingModule.forRoot({
       backdropBackgroundColour: 'rgba(0,0,0,0.8)',

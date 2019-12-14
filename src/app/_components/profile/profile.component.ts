@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { Profile } from 'src/app/_models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService) {
                 this.currentRoute = this.router.url;
               }
 

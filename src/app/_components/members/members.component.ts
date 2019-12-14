@@ -5,6 +5,7 @@ import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Profile } from 'src/app/_models/user';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-members',
@@ -27,7 +28,8 @@ export class MembersComponent implements OnInit, OnDestroy {
   constructor(
     private tierritasService: TierritasService,
     private router: Router,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private toastr: ToastrService) {
       this.currentRoute = this.router.url;
     }
 
