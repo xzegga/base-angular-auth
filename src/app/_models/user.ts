@@ -20,6 +20,7 @@ export class Profile {
     insurance_policy?: string;
     birthdate?: string;
     password?: string;
+    confirmPassword?: string;
     token?: string;
 }
 

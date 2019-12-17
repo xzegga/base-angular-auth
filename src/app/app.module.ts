@@ -26,6 +26,7 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { HeaderComponent } from './_components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { UtilsModule } from './_utils/utils.module';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ToastrModule } from 'ngx-toastr';
       primaryColour: '#ffffff',
       secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff'}),
-    DatePickerModule
+    DatePickerModule,
+    UtilsModule
   ],
   providers: [
     {

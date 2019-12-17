@@ -5,6 +5,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Profile, Contact, newUser} from 'src/app/_models/user';
 import { ToastrService } from 'ngx-toastr';
+import { Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-create-account',
@@ -14,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateAccountComponent implements OnInit, OnDestroy {
   public loading: boolean;
   subscriptions: Array<Subscription> = [];
-
+  maxDate = new Date();
   profile: Profile = new Profile();
   currentRoute: string;
 
@@ -53,7 +55,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
           const decodedToken = this.authService.getDecodedAccessToken(this.profile.token );
           this.profile.email = decodedToken.email;
         } else {
-          this.route.navigateByUrl('login')
+          this.route.navigateByUrl('login');
         }
       }
     )
@@ -80,6 +82,8 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
         if (response.status === 'success') {
           this.authService.setLoading(false);
           this.authService.setUser(response);
+          this.toastr.success('Ya eres parte de Tierritas Moto Club El Salvador', '¡Enhorabuena!');
+          this.route.navigateByUrl('login');
         }
       }
     );

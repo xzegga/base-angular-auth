@@ -762,3 +762,8 @@ input[type=search] {
 .spinner-three-bounce {
     position: fixed !important;
 }
+
+input.ng-dirty.ng-invalid {
+    border-bottom: 3px solid red;
+    background-color: #ffdbd6;
+}
