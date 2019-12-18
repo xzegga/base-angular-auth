@@ -24,6 +24,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   dateValue: Date;
   public maxDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
   currentRoute: string;
+  selectedFile: File = null;
 
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
@@ -84,6 +85,20 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       this.profile.contacts.push(new Contact());
     }
   }
+  
+  
+  onFileSelected(event){
+    this.selectedFile = <File>event.target.files[0];
+    const fd = new FormData();
+    this.authService.setLoading(true);
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+    this.tierritasService.updateProfileImage(fd).subscribe(res => {
+      this.authService.setLoading(false);
+      this.toastr.success('Imagen actualizada exitosamente', 'Enhorabuena');
+      this.profile.image = res
+      console.log(res);
+    })
+  }
 
 
   ngOnDestroy() {
@@ -94,7 +109,5 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFileSelected(event){
 
-  }
 }

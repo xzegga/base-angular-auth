@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {ResetPassword} from '../../_models/user';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,6 +19,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   password: ResetPassword = new ResetPassword();
   token: string;
   currentRoute: string;
+  imgHost = environment.api_url;
 
   constructor(
     private tierritasService: TierritasService,

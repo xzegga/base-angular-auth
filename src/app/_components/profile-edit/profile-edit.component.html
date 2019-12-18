@@ -3,8 +3,8 @@
 <div class="maxw avatarheader">
     <div class="avatar">
         <img src="assets/avatar.png" alt="">
-        <input type="file" (change)="onFileSelected($event)">
     </div>
+    <input type="file" (change)="onFileSelected($event)" name ="image"> 
 </div>
 <div class="maxw formContent register">
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
@@ -65,6 +65,6 @@
             </div>
         </div>
 
-        <button type="submit" [disabled]="!form.valid" [ngClass]="{'invalid': !form.valid}">REGISTRARSE</button>
+        <button type="submit" [disabled]="!form.valid" [ngClass]="{'invalid': !form.valid}">ACTUALIZAR</button>
     </form>
 </div>

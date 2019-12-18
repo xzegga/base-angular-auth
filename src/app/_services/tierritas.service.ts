@@ -53,13 +53,19 @@ export class TierritasService {
     return this.http.post<any>(this.basePath + `forgot-password/`, payload, this.httpOptions);
   }
 
-  updateProfileImage(){
-    return null;
-    // return this.http.post<any>(this.basePath + `forgot-password/`, payload, this.httpOptions);
+  updateProfileImage(formData: FormData){
+    return this.http.post<any>(this.basePath + `images/`,formData, {responseType:'text'});
+  }
+
+  getProfileImage(name){
+    return this.http.get<any>(this.basePath + `images/${name}`);  
   }
 
   resetPassword(payload: any){
     return this.http.post<any>(this.basePath + `reset-password/`, payload, this.httpOptions);
   }
+
+
+
 
 }
