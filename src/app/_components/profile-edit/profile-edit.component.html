@@ -1,10 +1,10 @@
 <app-header [currentRoute]="currentRoute"></app-header>
 <ngx-loading [show]="loading"></ngx-loading>
 <div class="maxw avatarheader">
-    <div class="avatar">
-        <img [src]="imgSrc" alt="{{profile.first_name}}">
-    </div>
-    <input type="file" (change)="onFileSelected($event)" name="image">
+    <label class="avatar edit" for="image"><img [src]="imgSrc">
+      <input type="file" (change)="onFileSelected($event)" name="image" id="image" class="hidden">
+    </label>
+
 </div>
 <div class="maxw formContent register">
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>

@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   currentProfileId: any;
   profileId: string;
   currentRoute: string;
+  imgSrc: any;
 
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
@@ -50,6 +51,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.tierritasService.getProfile(this.profileId).subscribe(profile => {
       this.profile = profile;
       this.getCurrentProfileId();
+      this.tierritasService.getProfileImage(profile.image).subscribe(res => {
+        this.imgSrc = this.tierritasService.convertToUrl(res);
+      });
       this.authService.setLoading(false);
     });
   }

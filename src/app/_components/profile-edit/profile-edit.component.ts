@@ -6,8 +6,6 @@ import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Profile, Contact } from 'src/app/_models/user';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-profile',
@@ -33,9 +31,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
               private tierritasService: TierritasService,
               private route: Router,
               private authService: AuthService,
-              private toastr: ToastrService,
-              private sanitizer: DomSanitizer) {
+              private toastr: ToastrService) {
                 this.currentRoute = this.route.url;
+                this.imgSrc = './assets/avatar.png';
                }
 
 
@@ -55,6 +53,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
     this.authService.setLoading(true);
     this.tierritasService.getProfile(this.currentProfileId).subscribe(profile => {
+      this.tierritasService.getProfileImage(profile.image || null).subscribe(res => {
+        this.imgSrc = this.tierritasService.convertToUrl(res);
+      });
       this.profile = profile;
       this.dateValue = new Date (this.profile.birthdate);
       if (this.profile.hasOwnProperty('contacts')) {
@@ -64,9 +65,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       } else {
         this.profile.contacts = [];
       }
-      this.tierritasService.getProfileImage(profile.image).subscribe(res => {
-        this.imgSrc = this.convertToUrl(res);
-      });
+
       this.authService.setLoading(false);
     });
   }
@@ -102,14 +101,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.tierritasService.updateProfileImage(fd).subscribe(res => {
       this.authService.setLoading(false);
       this.toastr.success('Imagen actualizada exitosamente', 'Enhorabuena');
-      this.imgSrc = this.convertToUrl(res);
+      this.imgSrc = this.tierritasService.convertToUrl(res);
     });
   }
 
-  convertToUrl(blob: any) {
-    const urlCreator = window.URL;
-    return this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(blob));
-  }
   ngOnDestroy() {
     for (const sub of this.subscriptions) {
       if (sub) {

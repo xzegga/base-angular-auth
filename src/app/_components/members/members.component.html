@@ -17,7 +17,7 @@
             <ng-template ngFor let-member [ngForOf]="members | filterList: filterString">
                 <tr (click)="showProfile(member.id)">
                     <td>
-                        <div class="thumbAvatar"><img src="assets/avatar.png" alt=""></div>
+                        <div class="thumbAvatar"><img [src]="member.image" alt=""></div>
                     </td>
                     <td><span>{{member.first_name}} {{member.last_name}}</span></td>
                 </tr>

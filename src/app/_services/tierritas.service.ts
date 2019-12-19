@@ -5,7 +5,8 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Profile } from '../_models/user';
-import { catchError } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class TierritasService {
 
   constructor(
     private router: Router,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private sanitizer: DomSanitizer) { }
 
   getMembers(): Observable<Profile[]> {
       return this.http.get<Profile[]>(this.basePath + 'user/', this.httpOptions);
@@ -67,7 +69,10 @@ export class TierritasService {
     return this.http.post<any>(this.basePath + `reset-password/`, payload, this.httpOptions);
   }
 
-
+  convertToUrl(blob: any) {
+    const urlCreator = window.URL;
+    return this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(blob));
+  }
 
 
 }

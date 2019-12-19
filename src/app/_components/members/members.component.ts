@@ -6,6 +6,7 @@ import { Profile } from 'src/app/_models/user';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-members',
@@ -47,6 +48,13 @@ export class MembersComponent implements OnInit, OnDestroy {
     this.authService.setLoading(true);
     this.tierritasService.getMembers()
     .subscribe((members: Profile[]) => {
+      members.forEach(member => {
+        const tempImage = member.image;
+        member.image = './assets/avatar.png';
+        this.tierritasService.getProfileImage(tempImage || null).subscribe(res => {
+          member.image = this.tierritasService.convertToUrl(res);
+        });
+      });
       this.members = members;
       this.getCurrentProfileId(members);
       this.authService.setLoading(false);
@@ -82,4 +90,5 @@ export class MembersComponent implements OnInit, OnDestroy {
       }
     }
   }
+
 }

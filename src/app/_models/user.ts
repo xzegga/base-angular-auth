@@ -19,7 +19,7 @@ export class Profile {
     insurance_company?: string;
     insurance_policy?: string;
     birthdate?: string;
-    image?: string;
+    image?: any;
     password?: string;
     confirmPassword?: string;
     token?: string;
