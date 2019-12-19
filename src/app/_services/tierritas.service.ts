@@ -54,11 +54,13 @@ export class TierritasService {
   }
 
   updateProfileImage(formData: FormData){
-    return this.http.post<any>(this.basePath + `images/`,formData, {responseType:'text'});
+    const responseType = 'blob' as 'json';
+    return this.http.post<any>(this.basePath + `images/`, formData, {responseType});
   }
 
-  getProfileImage(name){
-    return this.http.get<any>(this.basePath + `images/${name}`);  
+  getProfileImage(name: string){
+    const responseType = 'blob' as 'json';
+    return this.http.get<any>(this.basePath + `images/${name}`, {responseType});
   }
 
   resetPassword(payload: any){

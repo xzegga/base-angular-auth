@@ -1,11 +1,13 @@
 import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TierritasService } from 'src/app/_services/tierritas.service';
 import { Profile, Contact } from 'src/app/_models/user';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-profile',
@@ -25,12 +27,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   public maxDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
   currentRoute: string;
   selectedFile: File = null;
+  imgSrc: any;
 
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
               private route: Router,
               private authService: AuthService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private sanitizer: DomSanitizer) {
                 this.currentRoute = this.route.url;
                }
 
@@ -60,6 +64,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       } else {
         this.profile.contacts = [];
       }
+      this.tierritasService.getProfileImage(profile.image).subscribe(res => {
+        this.imgSrc = this.convertToUrl(res);
+      });
       this.authService.setLoading(false);
     });
   }
@@ -85,22 +92,24 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       this.profile.contacts.push(new Contact());
     }
   }
-  
-  
+
+
   onFileSelected(event){
-    this.selectedFile = <File>event.target.files[0];
+    this.selectedFile = event.target.files[0] as File;
     const fd = new FormData();
     this.authService.setLoading(true);
     fd.append('image', this.selectedFile, this.selectedFile.name);
     this.tierritasService.updateProfileImage(fd).subscribe(res => {
       this.authService.setLoading(false);
       this.toastr.success('Imagen actualizada exitosamente', 'Enhorabuena');
-      this.profile.image = res
-      console.log(res);
-    })
+      this.imgSrc = this.convertToUrl(res);
+    });
   }
 
-
+  convertToUrl(blob: any) {
+    const urlCreator = window.URL;
+    return this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(blob));
+  }
   ngOnDestroy() {
     for (const sub of this.subscriptions) {
       if (sub) {

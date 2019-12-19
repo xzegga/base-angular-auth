@@ -2,9 +2,9 @@
 <ngx-loading [show]="loading"></ngx-loading>
 <div class="maxw avatarheader">
     <div class="avatar">
-        <img src="assets/avatar.png" alt="">
+        <img [src]="imgSrc" alt="{{profile.first_name}}">
     </div>
-    <input type="file" (change)="onFileSelected($event)" name ="image"> 
+    <input type="file" (change)="onFileSelected($event)" name="image">
 </div>
 <div class="maxw formContent register">
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
