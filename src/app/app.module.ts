@@ -28,6 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { UtilsModule } from './_utils/utils.module';
 
+export function jwtTokenGetter() {
+  return localStorage.getItem('access_token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,16 +55,14 @@ import { UtilsModule } from './_utils/utils.module';
     FontAwesomeModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access_token');
-        },
+        tokenGetter: jwtTokenGetter,
         whitelistedDomains: ['localhost:9000'],
         blacklistedRoutes: ['localhost/auth/login']
       }
     }),
     ToastrModule.forRoot({
       timeOut: 5000,
-      positionClass: 'toast-bottom-center',
+      positionClass: 'toast-bottom-center', 
       preventDuplicates: true,
     }),
     NgxLoadingModule.forRoot({

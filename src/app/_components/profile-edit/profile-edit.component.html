@@ -21,7 +21,7 @@
         <div class="line"></div>
 
         <label for="">Fecha de nacimiento:</label>
-        <ejs-datepicker id='datepicker' [cssClass]="dateinput" [allowEdit]="true" [format]="'dd-MM-yyyy'" [max]="maxDate" placeholder='Selecciona una fecha' [value]='profile.birthdate'></ejs-datepicker>
+        <ejs-datepicker id='datepicker' [cssClass]="'dateInput'" [allowEdit]="true" [format]="'dd-MM-yyyy'" [max]="maxDate" placeholder='Selecciona una fecha' [value]='profile.birthdate'></ejs-datepicker>
 
         <label for="">Tipo de sangre:</label>
         <input type="text" name="bloodtype" placeholder="Tipo de sangre" [(ngModel)]="profile.bloodtype" required>

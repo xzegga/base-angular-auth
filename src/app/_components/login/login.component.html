@@ -14,6 +14,6 @@
             <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" [(ngModel)]="model.password" required />
         </div>
         <div (click)="forgotPass()" class="trigt"><a>¿Olvidaste tu contraseña?</a></div>
-        <button type="submit" class="btn btn-primary" [disabled]="submitted || !form.valid">Ingresar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Ingresar</button>
     </form>
 </div>
