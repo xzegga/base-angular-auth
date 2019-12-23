@@ -11,7 +11,7 @@
             </tr>
             <tr *ngFor='let invite of invites; let i = index'>
                 <td class="iconEdit">
-                    <input [(ngModel)]="invite.email" type="email" email />
+                    <input [(ngModel)]="invite.email" type="email"  name="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
                     <div class="checkboxT">
                         <label class="check-lbl"><input type="checkbox" name="checkbox" [(ngModel)]="invite.isAdmin" />&nbsp;Admin</label>
                     </div>
