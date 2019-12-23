@@ -1,14 +1,14 @@
 <app-header [currentRoute]="currentRoute"></app-header>
 <ngx-loading [show]="loading"></ngx-loading>
 <div class="maxw avatarheader">
-    <label class="avatar edit" for="image"><img [src]="imgSrc">
-      <input type="file" (change)="onFileSelected($event)" name="image" id="image" class="hidden">
-      <fa-icon [icon]="faPlus" class="close"></fa-icon>
+    <label class="avatar" for="image">
+        <fa-icon [icon]="faPlus" class="Change image"></fa-icon>
+        <img [src]="imgSrc">        
+        <input type="file" (change)="onFileSelected($event)" name="image" id="image" class="hidden">      
     </label>
-
 </div>
 <div class="maxw formContent register">
-    <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
+
     <form (ngSubmit)="editUser()" #form="ngForm" autocomplete="off">
         <label for="">Correo electrónico:</label>
         <div class="fakeFormField">{{profile?.email}}</div>
