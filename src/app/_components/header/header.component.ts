@@ -10,7 +10,7 @@ import {Location} from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
   @Input() currentRoute: string;
-  backedRoutes = ['invite', 'members', 'profile', 'profile-edit', 'forgot-password'];
+  backedRoutes = ['invite', 'profile', 'profile-edit', 'forgot-password'];
   sessionActive = ['invite', 'members', 'profile', 'profile-edit'];
   sessionVisible = false;
   backVisible = false;
