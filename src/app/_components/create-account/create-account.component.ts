@@ -79,7 +79,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
 
     this.tierritasService.signUpMember(this.profile).subscribe(
       response => {
-        if (response.status === 'success') {
+        if (response) {
           this.authService.setLoading(false);
           this.authService.setUser(response);
           this.toastr.success('Ya eres parte de Tierritas Moto Club El Salvador', '¡Enhorabuena!');
