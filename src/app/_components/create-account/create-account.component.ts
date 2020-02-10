@@ -1,12 +1,12 @@
 import { AuthService } from './../../_services/auth.service';
 import { TierritasService } from './../../_services/tierritas.service';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Profile, Contact, newUser} from 'src/app/_models/user';
+import { Profile, Contact, BLOODTYPE} from 'src/app/_models/user';
 import { ToastrService } from 'ngx-toastr';
-import { Validators, ValidationErrors, AbstractControl } from '@angular/forms';
-
+import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
+import { FormValidator, FormValidatorModel } from '@syncfusion/ej2-inputs';
 
 @Component({
   selector: 'app-create-account',
@@ -19,6 +19,13 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   maxDate = new Date();
   profile: Profile = new Profile();
   currentRoute: string;
+  passwordPattern =  new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g);
+  birthdate = null;
+  bloodtype = BLOODTYPE;
+
+  @ViewChild('form', {static: false}) form: any;
+  @ViewChild('ejDate', {static: false}) ejDate: DatePickerComponent;
+  public formObject: FormValidator;
 
   constructor(public activatedRoute: ActivatedRoute,
               private authService: AuthService,
@@ -46,6 +53,29 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       new Contact(),
       new Contact()
     ]
+
+    let customFn: (args: {
+      [key: string]: string
+    }) => boolean = (args: {
+        [key: string]: string
+    }) => {
+        return this.ejDate.value !== null;
+    };
+    let options: FormValidatorModel = {
+        rules: {
+            'datepicker': {
+                required: [true, "La fecha es requerida"]
+            }
+        },
+        customPlacement: (inputElement: HTMLElement, errorElement: HTMLElement) => {
+            // inputElement.parentElement.parentElement.appendChild(errorElement);
+        }
+    };
+    this.formObject = new FormValidator('#form-element', options);
+
+    this.formObject.addRules('datepicker', {
+        range: [customFn, "Selecciona una fecha en formato valido (dd-mm-yyyy)"]
+    });
   }
 
   onRouteChanged(map: ParamMap) {
@@ -76,7 +106,9 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       this.profile.insurance_company = '';
       this.profile.insurance_policy = '';
     }
-
+    const birdthdate = new Date(this.profile.birthdate);
+    this.profile.birthdate = birdthdate.getDate() + '-' + (birdthdate.getMonth() + 1) + '-' + birdthdate.getFullYear();
+    
     this.tierritasService.signUpMember(this.profile).subscribe(
       response => {
         if (response) {
@@ -95,5 +127,15 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     }
   }
 
+  public onFocusOut(): void {
+    console.log(this.form.valid)
+    this.formObject.validate("datepicker");
+  }
+
+  // Custom validation takes place when value is changed.
+  public onChange(args: any) {
+      if (this.ejDate.value !== null)
+          this.formObject.validate("datepicker");
+  }
 }
 

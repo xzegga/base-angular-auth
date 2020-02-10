@@ -22,16 +22,29 @@
         <div class="line"></div>
 
         <label for="">Fecha de nacimiento:</label>
-        <ejs-datepicker id='datepicker' [cssClass]="'dateInput'" [allowEdit]="true" [format]="'dd-MM-yyyy'" [max]="maxDate" placeholder='Selecciona una fecha' [value]='profile.birthdate'></ejs-datepicker>
+        <ejs-datepicker 
+            id='datepicker'
+            required 
+            [cssClass]="'dateInput'" 
+            [ngClass]="{'ng-invalid': this.profile.birthdate === undefined || this.profile.birthdate === null}"
+            [allowEdit]="false"
+            [format]="'dd-MM-yyyy'" 
+            [max]="maxDate" 
+            placeholder='Fecha en formato dd-mm-yyyy' 
+            [(value)]='profile.birthdate'>
+        </ejs-datepicker>
 
         <label for="">Tipo de sangre:</label>
-        <input type="text" name="bloodtype" placeholder="Tipo de sangre" [(ngModel)]="profile.bloodtype" required>
+        <select required placeholder="Tipo de sangre"
+            name="bloodtype" [(ngModel)]="profile.bloodtype"> 
+            <option *ngFor="let option of bloodtype" [value]="option" [selected]="option === profile.bloodtype">{{option}}</option>
+        </select>
 
-        <label for="">DUI:</label>
-        <input type="text" name="dui" placeholder="DUI" [(ngModel)]="profile.dui" required>
+        <label for="">DUI:   Ej. 12345678-9</label>
+        <input type="text" name="dui" placeholder="DUI" [(ngModel)]="profile.dui" required pattern="[0-9]{8}-[0-9]{1}">
 
-        <label for="">Teléfono:</label>
-        <input type="tel" name="phone" placeholder="Teléfono" [(ngModel)]="profile.phone" required>
+        <label for="">Teléfono:   Ej. 12345678</label>
+        <input type="text" name="phone" placeholder="Teléfono" [(ngModel)]="profile.phone" required pattern="[0-9]{8}">
 
         <label for="">Tipo de seguro:</label>
         <select id="tseguro" name="health_insurance_type" [(ngModel)]="profile.health_insurance_type">
@@ -66,6 +79,7 @@
             </div>
         </div>
 
-        <button type="submit" [disabled]="!form.valid" [ngClass]="{'invalid': !form.valid}">ACTUALIZAR</button>
+        <button type="submit" [disabled]="!form.valid || !this.profile.birthdate" [ngClass]="{'invalid': !form.valid || !this.profile.birthdate}">ACTUALIZAR</button>
+        
     </form>
 </div>

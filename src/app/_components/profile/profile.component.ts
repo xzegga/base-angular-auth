@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileId: string;
   currentRoute: string;
   imgSrc: any;
+  isProfileAdmin = false;
 
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
@@ -66,8 +67,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const token = this.authService.getJwtToken();
     if (token) {
       const currentProf = this.authService.getDecodedAccessToken(token);
+      this.isProfileAdmin = currentProf.isAdmin && !(Number(this.profileId) === Number(currentProf.user_id));
       this.currentProfileId = currentProf.user_id;
     }
+  }
+
+  
+  deleteProfile(id: number) {
+    this.authService.setLoading(true);
+    this.tierritasService.deleteMember(id).subscribe(res => {
+      this.authService.setLoading(false);
+      this.toastr.success('El suario ha sido eliminado con éxito', 'Enhorabuena');
+      this.router.navigateByUrl('members');
+    })
   }
 
   ngOnDestroy() {

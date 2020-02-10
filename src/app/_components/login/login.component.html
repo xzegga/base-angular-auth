@@ -6,12 +6,12 @@
 <div class="maxw formContent login">
     <form (ngSubmit)="login()" #form="ngForm">
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">Correo electrónico</label>
             <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter email" [(ngModel)]="model.email" required email/>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" [(ngModel)]="model.password" required />
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Contraseña" [(ngModel)]="model.password" required />
         </div>
         <div (click)="forgotPass()" class="trigt"><a>¿Olvidaste tu contraseña?</a></div>
         <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Ingresar</button>

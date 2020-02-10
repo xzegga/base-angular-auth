@@ -11,3 +11,12 @@
     bottom: 9px;
     position: absolute;
 }
+
+ejs-datepicker.ng-invalid {
+    border-bottom: 3px solid red;
+    background-color: #ffdbd6;
+}
+ejs-datepicker.ng-invalid  .e-control-wrapper {
+    background-color: transparent !important;
+    border-bottom: none !important;
+}

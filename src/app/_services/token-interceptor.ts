@@ -17,6 +17,11 @@ export class TokenInterceptor implements HttpInterceptor {
 
     if (this.authService.getJwtToken()) {
       request = this.addToken(request, this.authService.getJwtToken());
+    } else {
+      if(this.authService.isTokenExpired()) {
+        this.toastr.error('Tu sesión ha expirado', 'Inicio de sesión requerido');    
+        this.router.navigateByUrl('login');
+      }
     }
 
     return next.handle(request).pipe(

@@ -1,11 +1,13 @@
 import { AuthService } from './../../_services/auth.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TierritasService } from 'src/app/_services/tierritas.service';
-import { Profile, Contact } from 'src/app/_models/user';
+import { Profile, Contact, BLOODTYPE } from 'src/app/_models/user';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
+import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
+import { FormValidator, FormValidatorModel } from '@syncfusion/ej2-inputs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -26,6 +28,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   currentRoute: string;
   selectedFile: File = null;
   imgSrc: any;
+  @ViewChild('form', {static: false}) form: any;
+  @ViewChild('ejDate', {static: false}) ejDate: DatePickerComponent;
+  public formObject: FormValidator;
+  bloodtype = BLOODTYPE;
 
   constructor(public activatedRoute: ActivatedRoute,
               private tierritasService: TierritasService,
@@ -44,6 +50,29 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     ];
 
     this.getCurrentProfileId();
+
+    let customFn: (args: {
+      [key: string]: string
+    }) => boolean = (args: {
+        [key: string]: string
+    }) => {
+        return this.ejDate.value !== null;
+    };
+    let options: FormValidatorModel = {
+        rules: {
+            'datepicker': {
+                required: [true, "La fecha es requerida"]
+            }
+        },
+        customPlacement: (inputElement: HTMLElement, errorElement: HTMLElement) => {
+            // inputElement.parentElement.parentElement.appendChild(errorElement);
+        }
+    };
+    this.formObject = new FormValidator('#form-element', options);
+
+    this.formObject.addRules('datepicker', {
+        range: [customFn, "Selecciona una fecha en formato valido (dd-mm-yyyy)"]
+    });
   }
 
   getCurrentProfileId() {
@@ -83,6 +112,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.tierritasService.saveMember(this.profile).subscribe(response => {
       this.authService.setLoading(false);
       this.toastr.success('Tus datos han sido actualizados con éxito', 'Enhorabuena');
+    
+      this.route.navigateByUrl('members');
     });
   }
 
@@ -113,5 +144,16 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  public onFocusOut(): void {
+    console.log(this.form.valid)
+    this.formObject.validate("datepicker");
+  }
+
+  // Custom validation takes place when value is changed.
+  public onChange(args: any) {
+      if (this.ejDate.value !== null)
+          this.formObject.validate("datepicker");
+  }
 
 }

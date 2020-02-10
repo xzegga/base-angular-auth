@@ -42,11 +42,11 @@
                     <td>Tipo de Seguro:</td>
                     <td>{{profile?.health_insurance_type}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="profile?.health_insurance_type === 'Privado'">
                     <td>Aseguradora:</td>
                     <td>{{profile?.insurance_company}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="profile?.health_insurance_type === 'Privado'">
                     <td>No. póliza:</td>
                     <td>{{profile?.insurance_policy}}</td>
                 </tr>
@@ -61,7 +61,8 @@
 
 
         </div>
-
-        <div class="formContent edit"></div>
+        <div class="formContent edit">
+            <button (click)="deleteProfile(profile.id)" class="btn btn-primary" *ngIf="isProfileAdmin">ELIMINAR USUARIO</button>
+        </div>
     </div>
 </div>

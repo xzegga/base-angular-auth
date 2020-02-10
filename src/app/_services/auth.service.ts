@@ -67,6 +67,27 @@ export class AuthService {
     return localStorage.getItem('access_token') != null;
   }
 
+  getTokenExpirationDate(token: string): Date {
+    const decoded = jwt_decode(token);
+    console.log(decoded["exp"]);
+    if (decoded["exp"] === undefined) return null;
+
+    const date = new Date(0); 
+    date.setUTCSeconds(decoded["exp"]);
+    return date;
+  }
+
+  isTokenExpired(token?: string): boolean {
+    if(!token) token = this.getJwtToken();
+    if(token) {
+      const date = this.getTokenExpirationDate(token);
+      if(date === undefined) return false;
+      
+      return !(date.valueOf() > new Date().valueOf());
+    };    
+  }
+
+
   getJwtToken() {
     return localStorage.getItem('access_token');
   }

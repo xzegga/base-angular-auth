@@ -37,6 +37,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.authService.setLoading(true);
     this.tierritasService.forgotPassword(this.email).subscribe(response => {
       this.authService.setLoading(false);
+      this.toastr.success('Se te ha enviado un correo electrónico para reestablecer tu contraseña', '!Listo!');
+      this.route.navigateByUrl('login');
     });
   }
 

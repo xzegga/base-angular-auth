@@ -46,6 +46,11 @@ export class TierritasService {
     return this.http.put<any>(routeUrl, profile, this.httpOptions);
   }
 
+  deleteMember(id: number){
+    const routeUrl = this.basePath + 'user/' + id;
+    return this.http.delete<any>(routeUrl, this.httpOptions);
+  }
+
   validateInviteToken(token: string){
     return this.http.post<any>(this.basePath + `validate/${token}`, this.httpOptions);
   }

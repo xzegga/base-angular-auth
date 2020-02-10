@@ -1,0 +1,13 @@
+.small-message {
+    display: block;
+    font-size: 1.2rem;
+    color: #ffd400;
+}
+ejs-datepicker.ng-invalid {
+    border-bottom: 3px solid red;
+    background-color: #ffdbd6;
+}
+ejs-datepicker.ng-invalid  .e-control-wrapper {
+    background-color: transparent !important;
+    border-bottom: none !important;
+}
