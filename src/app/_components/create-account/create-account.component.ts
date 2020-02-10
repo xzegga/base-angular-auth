@@ -7,6 +7,7 @@ import { Profile, Contact, BLOODTYPE} from 'src/app/_models/user';
 import { ToastrService } from 'ngx-toastr';
 import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { FormValidator, FormValidatorModel } from '@syncfusion/ej2-inputs';
+import { faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-account',
@@ -19,9 +20,11 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   maxDate = new Date();
   profile: Profile = new Profile();
   currentRoute: string;
-  passwordPattern =  new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g);
+  passwordPattern =  new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/g);
   birthdate = null;
   bloodtype = BLOODTYPE;
+  faEyeIcon = faEye;
+  isPassword = true;
 
   @ViewChild('form', {static: false}) form: any;
   @ViewChild('ejDate', {static: false}) ejDate: DatePickerComponent;
@@ -54,17 +57,17 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
       new Contact()
     ]
 
-    let customFn: (args: {
+    const customFn: (args: {
       [key: string]: string
     }) => boolean = (args: {
         [key: string]: string
     }) => {
         return this.ejDate.value !== null;
     };
-    let options: FormValidatorModel = {
+    const options: FormValidatorModel = {
         rules: {
-            'datepicker': {
-                required: [true, "La fecha es requerida"]
+            datepicker: {
+                required: [true, 'La fecha es requerida']
             }
         },
         customPlacement: (inputElement: HTMLElement, errorElement: HTMLElement) => {
@@ -74,7 +77,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     this.formObject = new FormValidator('#form-element', options);
 
     this.formObject.addRules('datepicker', {
-        range: [customFn, "Selecciona una fecha en formato valido (dd-mm-yyyy)"]
+        range: [customFn, 'Selecciona una fecha en formato valido (dd-mm-yyyy)']
     });
   }
 
@@ -108,7 +111,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     }
     const birdthdate = new Date(this.profile.birthdate);
     this.profile.birthdate = birdthdate.getDate() + '-' + (birdthdate.getMonth() + 1) + '-' + birdthdate.getFullYear();
-    
+
     this.tierritasService.signUpMember(this.profile).subscribe(
       response => {
         if (response) {
@@ -129,13 +132,18 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
 
   public onFocusOut(): void {
     console.log(this.form.valid)
-    this.formObject.validate("datepicker");
+    this.formObject.validate('datepicker');
   }
 
   // Custom validation takes place when value is changed.
   public onChange(args: any) {
-      if (this.ejDate.value !== null)
-          this.formObject.validate("datepicker");
+      if (this.ejDate.value !== null) {
+        this.formObject.validate('datepicker');
+      }
+  }
+
+  showPassword(){
+    this.isPassword = !this.isPassword;
   }
 }
 

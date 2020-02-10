@@ -82,4 +82,4 @@ export class ResetPassword {
   }
 
 
-  export const BLOODTYPE = ["A+", "B+", "O+", "AB+", "A-", "B-", "O-", "AB-"]; 
+export const BLOODTYPE = ['A+', 'B+', 'O+', 'AB+', 'A-', 'B-', 'O-', 'AB-'];

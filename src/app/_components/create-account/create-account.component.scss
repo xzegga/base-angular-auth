@@ -3,11 +3,24 @@
     font-size: 1.2rem;
     color: #ffd400;
 }
+
 ejs-datepicker.ng-invalid {
     border-bottom: 3px solid red;
     background-color: #ffdbd6;
 }
-ejs-datepicker.ng-invalid  .e-control-wrapper {
+
+ejs-datepicker.ng-invalid .e-control-wrapper {
     background-color: transparent !important;
     border-bottom: none !important;
+}
+
+.view-pass {
+    position: relative;
+    .view-pass-icon {
+        position: absolute;
+        right: 9px;
+        color: gray;
+        top: 10px;
+        cursor: pointer;
+    }
 }

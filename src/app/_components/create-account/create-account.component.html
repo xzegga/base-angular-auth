@@ -5,7 +5,7 @@
 </div>
 <div class="maxw formContent register">
     <p>Alguien te ha invitado a suscrbirte como miembro a Tierritas Moto Club El Salvador</p>
-    <form (ngSubmit)="signUp()" #form="ngForm" autocomplete="off" action="" id="form-element" >
+    <form (ngSubmit)="signUp()" #form="ngForm" autocomplete="off" action="" id="form-element">
         <label for="">Correo electrónico:</label>
         <div class="fakeFormField">{{profile.email}}</div>
 
@@ -18,28 +18,21 @@
         <label for="password">Contraseña:</label>
         <span class="small-message">La contraseña debe tener 8 caracteres como mínimo y estar compuesta de almenos una letra mayúscula, una minúscula y un número
         </span>
-        <input type="password" autocomplete="new-password" name="password" [(ngModel)]="profile.password" required [pattern]="passwordPattern" autocomplete="new-pass">
-
+        <div class="view-pass">
+            <input [type]="isPassword? 'password': 'text'" autocomplete="new-password" name="password" [(ngModel)]="profile.password" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" autocomplete="new-pass">
+            <fa-icon [icon]="faEyeIcon" (click)="showPassword()" class="view-pass-icon"></fa-icon>
+        </div>
         <label for="confirmPassword">Repetir contraseña:</label>
         <input type="password" id="confirmPassword" [ngModel]="profile.confirmPassword" name="confirmPassword" required appCompare="password" autocomplete="new-confpass">
 
         <div class="line"></div>
 
         <label for="">Fecha de nacimiento:</label>
-        <ejs-datepicker id='datepicker' 
-            [cssClass]="'dateinput'"
-            #ejDate 
-            [ngClass]="{'ng-invalid': this.profile.birthdate === undefined || this.profile.birthdate === null}"
-            [allowEdit]="false"
-            [format]="'dd-MM-yyyy'" 
-            (blur)="onFocusOut()" (change)="onChange($event)"
-            [max]="maxDate" 
-            placeholder='Fecha en formato dd-mm-yyyy' 
-            [(value)]='profile.birthdate'></ejs-datepicker>
+        <ejs-datepicker id='datepicker' [cssClass]="'dateinput'" #ejDate [ngClass]="{'ng-invalid': this.profile.birthdate === undefined || this.profile.birthdate === null}" [allowEdit]="false" [format]="'dd-MM-yyyy'" (blur)="onFocusOut()" (change)="onChange($event)"
+            [max]="maxDate" placeholder='Fecha en formato dd-mm-yyyy' [(value)]='profile.birthdate'></ejs-datepicker>
 
         <label for="bloodtype">Tipo de sangre:</label>
-        <select required placeholder="Tipo de sangre"
-            name="bloodtype" [(ngModel)]="profile.bloodtype"> 
+        <select required placeholder="Tipo de sangre" name="bloodtype" [(ngModel)]="profile.bloodtype">
             <option *ngFor="let option of bloodtype" [value]="option" >{{option}}</option>
         </select>
 
@@ -47,12 +40,7 @@
         <input type="text" name="dui" placeholder="DUI" [(ngModel)]="profile.dui" pattern="[0-9]{8}-[0-9]{1}" required>
 
         <label for="phone">Teléfono: Ej. 12345678</label>
-        <input type="text" 
-            name="phone" 
-            pattern="[0-9]{8}"
-            placeholder="Teléfono" 
-            [(ngModel)]="profile.phone" 
-            required>
+        <input type="text" name="phone" pattern="[0-9]{8}" placeholder="Teléfono" [(ngModel)]="profile.phone" required>
 
 
         <label for="">Tipo de seguro:</label>
